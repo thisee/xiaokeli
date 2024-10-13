@@ -65,27 +65,25 @@ async yylb(e){
 let name=e.msg.replace(/#|\*|星铁|原神|语音|列表/g,'')
 let name2
 let def=true
-//星铁主角系列处理  2024.10.8 未修改
+let sr_id
+//星铁主角系列处理  
 if(name.includes('星')){
 name2=name.replace(/星/g,'')
- def=false
  switch (name2) {
     case '物理': 
     case '物主': 
     case '毁灭': 
-      name='毁灭星'
+      sr_id=3128
       break
     case '火主':
     case '存护':
-      name='存护星'
+      sr_id=3127
       break
     case '虚数':
     case '同谐':
     case '':
-      name='同谐星'
+      sr_id=872
       break
-    default:
-    def=true
     }
 }
 if(name.includes('穹')){
@@ -94,36 +92,29 @@ name2=name.replace(/穹/g,'')
     case '物理': 
     case '物主': 
     case '毁灭': 
-      name='毁灭穹'
-      def=false
+      sr_id=3124
       break
     case '火主':
     case '存护':
-      name='存护穹'
-      def=false
+      sr_id=3123
       break
     case '虚数':
     case '同谐':
     case '':
-      name='同谐穹'
-      def=false
+      sr_id=411
       break
-    default:
     }
 }
 //处理三月七
 if(name.includes('三月七')||name.includes('3月7')){
 name2=name.replace(/三月七|3月7/g,'')
 if(name2){
- def=false
  switch (name2) {
     case '虚数': 
     case '巡猎': 
     case '仙舟': 
-      name='仙舟三月七'
+      sr_id=3121
       break
-    default:
-    def=true
     }
    }
 }
@@ -157,11 +148,13 @@ def=false
 //非原神查星铁
  //调用喵崽别名
 if(def){
+if(!sr_id){
 let _name = gsCfg.getRole(name)
 if(_name.name != undefined & _name.name != "主角"){
       name = _name.name
 }
-let sr_id=(await mys.data(name,'js',true)).id
+sr_id=(await mys.data(name,'js',true)).id
+}
 if(sr_id){
 let sr=await yyjson.sr_download(sr_id)
 if(!sr?.table?.length) return e.reply('暂时没有该角色语音💔')
