@@ -1,0 +1,15 @@
+#修改的时候注意英文冒号后面要加空格
+#超清语音开关：true表示开，false表示关
+voice: false
+#语音列表图片撤回时间[单位:秒]⚠️只能取1-120
+time: 120
+#塔罗牌开关：true表示开，false表示关
+tlp: false
+#塔罗牌每天上限次数
+tlpcs: 3
+#星铁攻略开关：true表示开，false表示关
+srstrategy: false
+#查委托是否必须带#号前缀：true表示开，false表示关
+wt: false
+#米哈游视频播报：群号
+groups: []

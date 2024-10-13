@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" type="text/css" href="{{pluResPath}}yytable/table.css" />
+  <link rel="preload" href="{{pluResPath}}yytable/tt.ttf" as="font">
+  <link rel="preload" href="{{pluResPath}}yytable/bg.png" as="image">
+</head>
+<body background = '{{background}}'{{sys.scale}}>
+  <div class="container" id="container">
+<div class="bt">{{name}}语音列表</div>
+<table border="1" align=center>
+
+<% for(let i=0,o=1,p=2;i<table.length,o<table.length+1,p<table.length+2;i=i+3,o=o+3,p=p+3) { %>
+<tr>
+<td><%= i+1 %></td>
+<td><%= table[i].name %></td>
+
+{{if o<table.length}}
+<td><%= o+1 %></td>
+<td><%= table[o].name %></td>
+{{/if}}
+
+{{if p<table.length}}
+<td><%= p+1 %></td>
+<td><%= table[p].name %></td>
+{{/if}}
+</tr>
+<% }%>
+
+
+
+</table>
+<div class="end">
+<p>超清语音:{{ kg==false ? '已关闭' : '已开启(⚠️pc端QQ无法听取超清语音)' }}</br>获取语音→请回复该图片，回复内容为:序号</br>当然你也可以在回复里加上类型↙↙↙</br>例如:日语12 13韩语 英语15</p>
+</div>
+<p class="from" >from 小可莉</p>
+  </div>
+</body>
+</html>

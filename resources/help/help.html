@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{pluResPath}}help/help.css" />
+  <link rel="shortcut icon" href="#" />
+</head>
+
+<body {{sys.scale}}>
+  <div class="container" id="container">
+    <div class="head_box">
+      <div class="id_text">小可莉插件</div>
+      <p class="day_text">help列表</p>
+      <!-- <img class="genshin_logo" src="{{pluResPath}}help/璃月.png"/> -->
+    </div>
+    {{each data val}}
+    <div class="data_box">
+      <div class="tab_lable">{{val.group}}</div>
+      <div class="list">
+        {{each val.list item}}
+        {{if val.group=='主人专用指令'}}
+        <div class="item_">
+          <div class="title">
+            <div class="text">{{item.title}}</div>
+            <div class="dec">{{item.desc}}</div>
+          </div>
+        </div>
+        {{else}}
+        <div class="item">
+          <div class="title">
+            <div class="text">{{item.title}}</div>
+            <div class="dec">{{item.desc}}</div>
+          </div>
+        </div>
+        {{/if}}
+        {{/each}}
+      </div>
+    </div>
+    {{/each}}
+    <div class="logo">from 小可莉</div>
+  </div>
+</body>
+
+</html>

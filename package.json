@@ -1,0 +1,10 @@
+{
+  "name": "xiaokeli",
+  "version": "1.4.0",
+  "author": "额.",
+  "description": "自用的乱写的作用于喵崽的插件",
+  "type": "module",
+  "imports": {
+    "#xiaokeli": "./system/index.js"
+  }
+}
