@@ -34,7 +34,7 @@ export class mysmb extends plugin {
 		});
 	}
 async mys(e){
-if(fs.existsSync('./plugins/xiaokeli/system/copy/ProfileAvatar.js')){
+if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
  if (!e.isMaster) return false
  e.reply('首次使用该功能，需要修改喵佬的models/avatar/ProfileAvatar.js文件,请发送：小可莉面板文件替换\n\n后续更新miao-plugin，如果因为该文件引发冲突，可使用:小可莉面板文件还原')
  return false
@@ -358,7 +358,7 @@ async mbwj(e){
   return true
   }else{
   if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
-  await e.reply('找不到原文件，是不是被你删了。。。', true)
+  await e.reply('没找到原文件。。。', true)
     return true
   }
   fs.cpSync('./plugins/miao-plugin/models/avatar/ProfileAvatar.js','./plugins/xiaokeli/system/copy/ProfileAvatar.js')
