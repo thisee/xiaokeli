@@ -96,7 +96,7 @@ async function vid(e,thise=false) {
     content=JSON.parse(list[n].post.structured_content)[0].insert
     //封面
     img=list[n].post.cover
-    //老米这地址被QQ卡了，只能下载下来，再发了
+    //QQ不支持https://upload-bbs.miyoushe.com/
     if(img.includes('https://upload-bbs.miyoushe.com/')){
     path=`./plugins/xiaokeli/temp/${name}视频封面.jpg`
     await common.downFile(img+'?x-oss-process=image//resize,p_30', path)

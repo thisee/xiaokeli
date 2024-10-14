@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import yaml from './system/yaml.js'
 var path='./plugins/xiaokeli/config/'
 
 if (!global.core) {
@@ -6,19 +7,25 @@ if (!global.core) {
     global.core = (await import("oicq")).core
   } catch (err) {}
 }
-
 if (!fs.existsSync(path)) {
   fs.mkdirSync(path)
 }
-// let path_='./plugins/xiaokeli/config/srstrategy.yaml'
-// if (!fs.existsSync(path_)) {
-// fs.cpSync('./plugins/xiaokeli/system/default/srstrategy.yaml',path_)
-// }
 let _path='./plugins/xiaokeli/config/config.yaml'
 if (!fs.existsSync(_path)) {
 fs.cpSync('./plugins/xiaokeli/system/default/config.yaml',_path)
 logger.info('[小可莉]配置文件初始化')
 }
+let cfg=yaml.get(_path)
+let def_cfg=yaml.get('./plugins/xiaokeli/system/default/config.yaml')
+
+if(Object.keys(cfg).length!= Object.keys(def_cfg).length){
+fs.cpSync('./plugins/xiaokeli/system/default/config.yaml',_path)
+logger.info('[小可莉]重载配置文件')
+for(let v in cfg){
+yaml.set(_path,v,cfg[v])
+}
+}
+
 if (!global.segment) {
   global.segment = (await import("oicq")).segment
 }

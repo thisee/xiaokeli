@@ -4,7 +4,7 @@
 
 ## 使用语音功能需要bot安装[ffmpeg](https://gitee.com/baihu433/ffmpeg)(小白推荐使用白狐的一键安装)
 
-## cd到崽的目录，然后↘↓↙
+## cd到崽的根目录，然后↘↓↙
 ```
 git clone https://gitee.com/this_e/xiaokeli.git ./plugins/xiaokeli/
 ```
@@ -17,6 +17,7 @@ git clone https://gitee.com/this_e/xiaokeli.git ./plugins/xiaokeli/
 |塔罗牌|默认关闭，自己开启|
 |(自动播报)|米家3游戏的最新视频,设置群号后会自动播报|
 |(每日npc委托名)|查询每日委托是否有成就|
+|m更新面板|通过米游社获取原神角色面板|
 |小可莉帮助|不懂的就发这个|
 
 
@@ -25,7 +26,7 @@ git clone https://gitee.com/this_e/xiaokeli.git ./plugins/xiaokeli/
 1. 请勿传播至视频平台，如：bilibili
 2. 请尊重Yunzai本体及其他插件作者的努力，勿将Yunzai及其他插件用于以盈利为目的的场景
 3. 建库的初衷，只为大家学习和交流，如有错误的地方，欢迎指正！
-
+4. 我是菜鸟，我什么也不懂(ó﹏ò｡) ,非本插件的问题，我都不知道
 
 ## 星铁攻略图源
 |                           星铁攻略图的作者大大                |

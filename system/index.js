@@ -3,4 +3,6 @@ import render from './render.js'
 import yaml from './yaml.js'
 import uploadRecord from './uploadRecord.js'
 import yyjson from './yyjson.js' 
-export { mys,render,yaml,uploadRecord,yyjson }
+import MysInfo from './copy/mysInfo.js' 
+
+export { mys,render,yaml,uploadRecord,yyjson,MysInfo }

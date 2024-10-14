@@ -37,6 +37,9 @@ export class pz extends plugin {
           }, {
           reg: '^#*(小可莉设置)?(开启|关闭)(查)?委托前缀$',
           fnc: 'f7',
+         },{
+          reg: `^#*${xx}面板(cd|CD)(.*)$`,
+          fnc: 'f8',
          },
       ]
     })
@@ -108,15 +111,19 @@ async f7(e) {
   this.sz(e)
  }
 
-
+async f8(e){
+let cd=await (/\d+/).exec(e.msg)
+await yaml.set(path,'mbCD',Number(cd))
+this.sz(e)
+}
 
 async sz(e){
   let data = await yaml.get(path)
-  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n语音列表撤回时间：${data.time}秒\n星铁攻略：${data.srstrategy? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
+  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n语音列表撤回时间：${data.time}秒\n米游社更新面板CD：${data.mbCD}秒\n星铁攻略：${data.srstrategy? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
   for (let group of data.groups) {
     msg.push(segment.image(`https://p.qlogo.cn/gh/${group}/${group}/100`),'\n',Bot.pickGroup(group, true).info.group_name,group.toString())
   }
-  let msg_='--------设置指令列表--------\n①塔罗牌：\n小可莉设置塔罗牌开启\n小可莉设置塔罗牌关闭\n\n②塔罗牌每日次数：\n小可莉设置塔罗牌次数(+数字)\n\n③语音列表撤回时间：\n语音列表时间(+数字,只能取1～120)\n\n④星铁攻略：\n小可莉设置星铁攻略开启\n小可莉设置星铁攻略关闭\n\n⑤查委托是否必须带#前缀：\n开启委托前缀\n关闭委托前缀\n\n⑥米哈游视频播报群号：\n添加播报群(+群号)\n删除播报群(+群号)'
+  let msg_='--------设置指令列表--------\n①塔罗牌：\n小可莉设置塔罗牌开启\n小可莉设置塔罗牌关闭\n\n②塔罗牌每日次数：\n小可莉设置塔罗牌次数(+数字)\n\n③语音列表撤回时间：\n语音列表时间(+数字,只能取1～120)\n\n④米游社更新面板CD：\n小可莉设置面板cd(+数字)\n\n⑤星铁攻略：\n小可莉设置星铁攻略开启\n小可莉设置星铁攻略关闭\n\n⑥查委托是否必须带#前缀：\n开启委托前缀\n关闭委托前缀\n\n⑦米哈游视频播报群号：\n添加播报群(+群号)\n删除播报群(+群号)'
   msg=[msg,msg_]
   msg=await common.makeForwardMsg(e, msg,'小可莉设置')
   return e.reply(msg)
