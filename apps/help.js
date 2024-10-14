@@ -21,14 +21,16 @@ export class help extends plugin {
   async help (e) {
     let data = await yaml.get('./plugins/xiaokeli/system/default/help.yaml')
     if (!data) return
-
-   this.img(e,data)
+   let au = false
+   if (e.isMaster) au=true
+   this.img(e,data,au)
   }
 
- img(e,data) {
+ img(e,data,au) {
  let _data_={
  pluResPath: `${path}/plugins/xiaokeli/resources/`,
-  data
+  data,
+  au
     }
   render('help/help',_data_,{e,pct:3,ret:true})
   }

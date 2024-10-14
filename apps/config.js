@@ -35,11 +35,13 @@ export class pz extends plugin {
           fnc: 'f6',
           permission: 'master'
           }, {
-          reg: '^#*(小可莉设置)?(开启|关闭)(查)?委托前缀$',
+          reg: '^#*(小可莉)?(设置)?(开启|关闭)(查)?委托前缀$',
           fnc: 'f7',
+          permission: 'master'
          },{
           reg: `^#*${xx}面板(cd|CD)(.*)$`,
           fnc: 'f8',
+          permission: 'master'
          },
       ]
     })

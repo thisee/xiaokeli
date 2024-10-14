@@ -19,20 +19,22 @@
       <div class="tab_lable">{{val.group}}</div>
       <div class="list">
         {{each val.list item}}
-        {{if val.group=='主人专用指令'}}
-        <div class="item_">
-          <div class="title">
-            <div class="text">{{item.title}}</div>
-            <div class="dec">{{item.desc}}</div>
-          </div>
-        </div>
-        {{else}}
+        {{if val.group!='主人专用指令'}}
         <div class="item">
           <div class="title">
             <div class="text">{{item.title}}</div>
             <div class="dec">{{item.desc}}</div>
           </div>
         </div>
+        {{else}}
+        {{if au}}
+        <div class="item_">
+          <div class="title">
+            <div class="text">{{item.title}}</div>
+            <div class="dec">{{item.desc}}</div>
+          </div>
+        </div>
+        {{/if}}
         {{/if}}
         {{/each}}
       </div>
