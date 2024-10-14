@@ -352,7 +352,6 @@ async mbwj(e){
   if(e.msg.includes('替换')){
   fs.cpSync('./plugins/miao-plugin/models/avatar/ProfileAvatar.js','./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
   fs.cpSync('./plugins/xiaokeli/system/copy/ProfileAvatar.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
-  fs.unlinkSync('./plugins/xiaokeli/system/copy/ProfileAvatar.js')
   await e.reply('文件替换完成,准备重启~', true)
   new Restart(e).restart()
   return true
@@ -361,7 +360,6 @@ async mbwj(e){
   await e.reply('没找到原文件。。。', true)
     return true
   }
-  fs.cpSync('./plugins/miao-plugin/models/avatar/ProfileAvatar.js','./plugins/xiaokeli/system/copy/ProfileAvatar.js')
   fs.cpSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
   fs.unlinkSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
   e.reply('文件还原成功！', true)
