@@ -97,43 +97,7 @@ export default class MysApi {
         Getfp: true
       })
     }
-    // if (data.deviceFp) {
-      // data.headers['x-rpc-device_fp'] = data.deviceFp;
-    // }
-        // const ck = this.cookie;
-    // let ltuid = ck.match(/ltuid=(\d+);/);
-    // if (ltuid) {
-      // ltuid = ltuid[1];
-    // }
-      // let bindInfo = await redis.get(`ZZZ:DEVICE_FP:${ltuid}:BIND`);
-      // if (bindInfo) {
-        // try {
-          // bindInfo = JSON.parse(bindInfo);
-          // data = {
-            // ...data,
-            // productName: bindInfo?.deviceProduct,
-            // deviceType: bindInfo?.deviceName,
-            // modelName: bindInfo?.deviceModel,
-            // oaid: bindInfo?.oaid,
-            // deviceInfo: bindInfo?.deviceFingerprint,
-            // board: bindInfo?.deviceBoard,
-          // };
-        // } catch (error) {
-          // bindInfo = null;
-        // }
-      // }
-      // const device_fp = await redis.get(`ZZZ:DEVICE_FP:${ltuid}:FP`);
-      // // if (device_fp) {
-        // // data.deviceFp = device_fp;
-        // // data.headers['x-rpc-device_fp'] = device_fp;
-      // // }
-      // const device_id = await redis.get(`ZZZ:DEVICE_FP:${ltuid}:ID`);
-      // // if (device_id) {
-        // // data.deviceId = device_id;
-        // // data.headers['x-rpc-device_id'] = device_id;
-      // // }
-     // logger.error(bindInfo,device_fp,device_id)
-     // logger.error(data)
+
     let { url, headers, body } = this.getUrl(type, data)
 
     if (!url) return false

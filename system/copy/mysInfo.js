@@ -1,4 +1,4 @@
-import MysApi from '../../../genshin/model/mys/mysApi.js'
+import MysApi from './mysApi.js'
 import GsCfg from '../../../genshin/model/gsCfg.js'
 import lodash from 'lodash'
 import NoteUser from '../../../genshin/model/mys/NoteUser.js'
@@ -416,7 +416,7 @@ export default class MysInfo {
           // res = await handler.call('mys.req.err_', this.e, { mysApi, type, res, data, mysInfo: this }) || res
         // }
         if (res.api == 'character_detail') {
-        this.e.reply(`UID:${this.uid}的米游社面板数据暂时无法查询，等过段时间吧～`)
+        this.e.reply(`UID:${this.uid}的米游社面板数据暂时无法查询，等过段时间再试吧～`)
         }else{
        if (!isTask) this.e.reply([`UID:${this.uid}，米游社接口报错，暂时无法查询：${res.message || 'error'}`, this.mysButton])
         }
