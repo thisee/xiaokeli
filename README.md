@@ -1,5 +1,7 @@
 <h1>小可莉插件</h1>
 
+<img src="https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=CgoxNDUwNDAzNDE3EhQAXzOsGx57qTzBWBPC5gtplu4SaBiLjRUg_woo_73xy-aZiQMyBHByb2RQgL2jAQ&rkey=CAMSKCnRkWXeilTOxx7ceNxrNvtAqT5vypUObTdLNsNz7uDC07Tn7PIxK0w&spec=0" alt="可莉" width = "400" align="left">
+
 <h2>在合适的时机选择跑路吧~٩(๑•ㅂ•)۶</h2>
 
 ## 使用语音功能需要bot安装[ffmpeg](https://gitee.com/baihu433/ffmpeg)(小白推荐使用白狐的一键安装)
@@ -8,6 +10,15 @@
 ```
 git clone https://gitee.com/this_e/xiaokeli.git ./plugins/xiaokeli/
 ```
+<details>
+  <summary>Github</summary>
+  
+```
+git clone https://github.com/thisee/xiaokeli.git ./plugins/xiaokeli/
+```
+
+</details>
+
 ---
 | 指令 | 说明|
 | --------------- | --------------- |
@@ -21,11 +32,14 @@ git clone https://gitee.com/this_e/xiaokeli.git ./plugins/xiaokeli/
 |*m更新面板|通过米游社获取崩铁角色面板|
 |小可莉帮助|不懂的就发这个|
 
-# 未来也许可能万一会写的。。
-
+<details>
+  <summary>未来也许可能万一会写的。。</summary>
+  
 1. xx图鉴
 2. 星铁历史卡池？
 3. 氵。。。
+
+</details>
 
 # 声明
 
