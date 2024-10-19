@@ -1,6 +1,6 @@
 <h1>小可莉插件</h1>
 
-<img src="https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=CgoxNDUwNDAzNDE3EhQAXzOsGx57qTzBWBPC5gtplu4SaBiLjRUg_woo_73xy-aZiQMyBHByb2RQgL2jAQ&rkey=CAMSKCnRkWXeilTOxx7ceNxrNvtAqT5vypUObTdLNsNz7uDC07Tn7PIxK0w&spec=0" alt="可莉" width = "400" align="left">
+<img src="https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=CgoxNDUwNDAzNDE3EhQAXzOsGx57qTzBWBPC5gtplu4SaBiLjRUg_woo_73xy-aZiQMyBHByb2RQgL2jAQ&rkey=CAMSKCnRkWXeilTOxx7ceNxrNvtAqT5vypUObTdLNsNz7uDC07Tn7PIxK0w&spec=0" alt="可莉" width = "400">
 
 <h2>在合适的时机选择跑路吧~٩(๑•ㅂ•)۶</h2>
 
