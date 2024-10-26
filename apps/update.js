@@ -73,7 +73,6 @@ export class update extends plugin {
 
         let type = '更新'
         if (this.e.msg.includes('强制')) {
-            this.isUp = true
             type = '强制更新'
             cm = `cd "plugins/${plugin}" && git reset --hard && git pull --rebase --allow-unrelated-histories`
         }
