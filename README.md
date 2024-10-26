@@ -19,7 +19,7 @@ git clone https://github.com/thisee/xiaokeli.git ./plugins/xiaokeli/
 
 </details>
 
-##安装依赖
+## 安装依赖
 ```
 pnpm i
 ```

@@ -683,7 +683,7 @@ if(!ck) return false
          logger.error(err)
        }
    if(res.code!=0) return logger.error(res.message)
-   if(!res.data.refresh&&!qz) return e.reply('当前b站ck，无需刷新！如有问题，请重新b站登录或者发送：强制更新b站ck！')
+   if(!res.data.refresh&&!qz) return e.reply('当前b站ck，无需刷新！如有问题，请重新b站登录或者发送：强制更新b站ck')
    let timestamp=res.data.timestamp
    //通过返回的时间戳算出签名
    const correspondPath=await getCorrespondPath(timestamp)
