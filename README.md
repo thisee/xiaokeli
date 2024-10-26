@@ -18,10 +18,14 @@ git clone https://github.com/thisee/xiaokeli.git ./plugins/xiaokeli/
 ```
 
 </details>
+
 ##安装依赖
 ```
 pnpm i
 ```
+
+
+
 ---
 | 指令 | 说明|
 | --------------- | --------------- |
