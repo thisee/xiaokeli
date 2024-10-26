@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ppath}}video.css">
+    </head>
+    <body {{sys.scale}}>
+        <div class="container" id="container">
+           <div class="up_box"><img src="{{tx}}">
+                <div class="t_box">
+                    <p></p>
+                </div>
+                <div class="xx_box">
+                    <div class="x_box"><img src="{{ppath}}/imgs/like.png">
+                        <p>{{num}}</p>
+                    </div>
+                    <div class="bili">
+                    <img src="{{ppath}}/imgs/bili.png">
+                    </div>
+                    
+                    
+                  <div class="l_box">
+                  <p>{{name}}</p>
+                  <p>等级：{{lv}}级</p>
+                  <p>{{time}}</p>
+                  <p>{{ip}}</p>
+                </div>
+                
+                  <div class="r_box_">
+                  <div class="tab">评论</div>
+                  <p>{{if typeof(msg)=='String'}}{{msg}}{{else}}{{each msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</p>
+                </div>
+                </div>
+ 
+            </div>
+            
+           {{if pic.length}}
+              <div class="pl">
+              <div class="pl_tab">共{{pic.length}}张图,可在10分钟内回复该图片：下载图片</div>
+              {{each pic i}}
+              <img class="pic" src="{{i}}">
+              {{/each}}
+              </div>
+              {{/if}}
+              
+              {{if reply.length}}
+            <div class="pl">
+              <div class="pl_tab">{{reply_num}}</div>
+              {{each reply k}}
+              <div class="re">
+                <img class="re_tx" src="{{k.tx}}">
+                <p>{{k.name}}</p>
+                <p>{{k.time}}</p>
+                <p>{{k.ip}}</p>
+               <img src="{{ppath}}/imgs/{{k.lv}}.png">
+               <hr>
+               <div class="re_p">{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+               <div class="re_w">
+              <img class="dianzan" src="{{ppath}}/imgs/redz.png">
+             <div class="_num">{{k.num}}</div>
+              </div>
+              </div>
+              {{/each}}
+            </div>
+          {{/if}}
+            <div class="logo">
+                from 小可莉
+            </div>
+        </div>
+    </body>
+</html>

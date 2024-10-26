@@ -116,10 +116,10 @@ async function vid(e,thise=false) {
   let msg = await Bot.makeForwardMsg(msgs)
     // msg=await common.makeForwardMsg(e, msg,`小可莉发现了新视频，一起来看看吧！\n这次的游戏有：${names}`)
     msg.data.meta.detail.news=[]
+    let botname=(await yaml.get('./plugins/xiaokeli/config/config.yaml')).botname || ''
     //合并消息的外层文案
     let text={
-      // 'text':`小可莉发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
-      'text':`发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
+      'text':`${botname}发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
     }
     msg.data.meta.detail.news.push(text)
    if (thise) {

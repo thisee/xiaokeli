@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ppath}}video.css">
+    </head>
+    <body {{sys.scale}}>
+        <div class="container" id="container">
+            <div class="box" style="background-image: url({{pic}});"><img src="{{ppath}}imgs/bf.png"> <img src="{{ppath}}imgs/d71.png">
+            <p class="time">{{time}}</p>
+                <div class="h_box"><img src="{{ppath}}imgs/Bf.png">
+                    <p>{{view}}</p> <img class="Dm" src="{{ppath}}imgs/Dm.png">
+                    <p>{{danmaku}}</p> <img class="g" src="{{ppath}}imgs/g.png">
+                    <p>{{online}}人正在看</p>
+                </div>
+            </div>
+            <div class="up_box"><img src="{{tx}}">
+                <div class="t_box">
+                    <p>{{title}}</p>
+                </div>
+                <div class="xx_box">
+                    <div class="x_box"><img src="{{ppath}}/imgs/like.png">
+                        <p>{{like}}</p>
+                    </div>
+                    <div class="x_box"><img src="{{ppath}}/imgs/tb.png">
+                        <p>{{coin}}</p>
+                    </div>
+                    <div class="x_box_"><img src="{{ppath}}/imgs/sc.png">
+                        <p>{{favorite}}</p>
+                    </div>
+                    <div class="x_box"><img src="{{ppath}}/imgs/zf.png">
+                        <p>{{share}}</p>
+                    </div>
+                    <div class="bili">
+                    <img src="{{ppath}}/imgs/bili.png">
+                    </div>
+                    
+                    
+                  <div class="l_box">
+                  <p>{{name}}</p>
+                  <p>{{pubdate}}</p>
+                  <p>上传稿件时间</p>
+                  <p>{{ctime}}</p>
+                </div>
+                
+                  <div class="r_box">
+                  <div class="tab">简介</div>
+                  <div class="copy">{{copyright==1 ? '原创' : '转载'}}</div>
+                  <p>{{desc}}</p>
+                </div>
+                </div>
+ 
+            </div>
+            
+            <div class="pl">
+              <div class="pl_tab">评论区 {{reply}}</div>
+              {{if reply != 0 }}
+              {{each pls k}}
+              <div class="re">
+                <img class="re_tx" src="{{k.tx}}">
+                <p>{{k.name}}</p>
+                <p>{{k.time}}</p>
+                <p>{{k.ip}}</p>
+               <img src="{{ppath}}/imgs/{{k.lv}}.png">
+               <hr>
+               <div class="re_p">{{if k.zhiding}}<img class="zhiding" src="{{ppath}}/imgs/zhiding.png">{{/if}}{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+               <div class="re_w">
+              <img class="dianzan" src="{{ppath}}/imgs/redz.png">
+             <div class="_num">{{k.num}}</div>
+             {{if k.reply_num}}<p class="reply_num">{{k.reply_num}}</p>{{/if}}
+              </div>
+              </div>
+              {{/each}}
+              {{else}}
+              <img class="kong" src="{{ppath}}/imgs/kong.png"align="middle">
+              {{/if}}
+            </div>
+            
+            
+            <div class="logo">
+                from 小可莉
+            </div>
+        </div>
+    </body>
+</html>

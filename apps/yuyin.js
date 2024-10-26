@@ -184,7 +184,7 @@ f=await e.reply(img)
 f=await e.reply(img,false,{ recallMsg:time })
 }
 
-await redis.set(`xiaokeli_yy:${f.message_id}`,JSON.stringify(data),{EX: time })
+await redis.set(`xiaokeli_yy:${f.time}`,JSON.stringify(data),{EX: time })
 return true
 }
 return false
@@ -223,7 +223,7 @@ async fsyy (e) {
   }else{ return false}
  
     
-let data =await redis.get(`xiaokeli_yy:${source.message_id}`)
+let data =await redis.get(`xiaokeli_yy:${source.time}`)
   if(!data) return false
   data=await JSON.parse(data)
   let name=data.name

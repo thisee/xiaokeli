@@ -1,15 +1,16 @@
 import fs from 'node:fs'
 import yaml from './system/yaml.js'
-var path='./plugins/xiaokeli/config/'
+var paths=['./plugins/xiaokeli/config/','./plugins/xiaokeli/temp/']
 
 if (!global.core) {
   try {
     global.core = (await import("oicq")).core
   } catch (err) {}
 }
+paths.map((path)=>{          
 if (!fs.existsSync(path)) {
   fs.mkdirSync(path)
-}
+}})
 let _path='./plugins/xiaokeli/config/config.yaml'
 if (!fs.existsSync(_path)) {
 fs.cpSync('./plugins/xiaokeli/system/default/config.yaml',_path)

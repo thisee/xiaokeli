@@ -1,3 +1,4 @@
+botname:''
 #修改的时候注意英文冒号后面要加空格
 #超清语音开关：true表示开，false表示关
 voice: false
@@ -13,5 +14,15 @@ tlpcs: 3
 srstrategy: false
 #查委托是否必须带#号前缀：true表示开，false表示关
 wt: false
-#米哈游视频播报：群号
+#米哈游视频播报(米游社)：QQ群号
 groups: []
+#是否启用bilibili相关功能：true表示开，false表示关
+bilibili: true
+#bilibili视频的主评论区，显示几条评论((1-20)不建议设置过多)
+list_num: 10
+#bilibili收藏视频的收藏夹序号(1就是默认收藏夹)
+mlid_n: 1
+#bilibili的Cookie(别手动加,请发送：小可莉b站登录)
+bili_ck: ''
+#bilibili刷新ck需要用到的刷新口令(不要乱改，这是扫码登录获取的)
+refresh_token: ''

@@ -18,7 +18,10 @@ git clone https://github.com/thisee/xiaokeli.git ./plugins/xiaokeli/
 ```
 
 </details>
-
+##安装依赖
+```
+pnpm i
+```
 ---
 | 指令 | 说明|
 | --------------- | --------------- |
@@ -30,6 +33,8 @@ git clone https://github.com/thisee/xiaokeli.git ./plugins/xiaokeli/
 |(每日npc委托名)|查询每日委托是否有成就|
 |m更新面板|通过米游社获取原神角色面板|
 |*m更新面板|通过米游社获取崩铁角色面板|
+|(bilibili视频解析)|bilibili视频自动解析：卡片，链接(都可)|
+|点赞，投币，评论...，拉黑，展开，开启推送...|对bilibili视频的一些操作|
 |小可莉帮助|不懂的就发这个|
 
 <details>
