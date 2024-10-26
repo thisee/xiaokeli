@@ -152,7 +152,7 @@ export class update extends plugin {
         try {
             time = await execSync(cm, { encoding: 'utf-8' })
             time = lodash.trim(time)
-            time = time.replace(/ago/g,"前").replace(/days/g,"天").replace(/ /g,'').replace(/hours/g,'小时').replace(/minutes/g,'分钟').replace(/seconds/g,'秒').replace(/weeks/g,'周').replace(/months/g,'月')
+            time = time.replace(/ago/g,"前").replace(/days/g,"天").replace(/hours/g,'小时').replace(/minutes/g,'分钟').replace(/seconds/g,'秒').replace(/weeks/g,'周').replace(/months/g,'月')
         } catch (error) {
             logger.error(error.toString())
             time = '获取时间失败'
@@ -190,7 +190,7 @@ export class update extends plugin {
             str = str.split('||')
             if (str[0] == this.oldCommitId) break
             if (str[1].includes('Merge branch')) continue
-            str[1]= str[1].replace(/ago/g,"前").replace(/days/g,"天").replace(/ /g,'').replace(/hours/g,'小时').replace(/minutes/g,'分钟').replace(/seconds/g,'秒').replace(/weeks/g,'周').replace(/months/g,'月')
+            str[1]= str[1].replace(/ago/g,"前").replace(/days/g,"天").replace(/hours/g,'小时').replace(/minutes/g,'分钟').replace(/seconds/g,'秒').replace(/weeks/g,'周').replace(/months/g,'月')
             log.push(str[1])
         }
         let line = log.length
