@@ -13,6 +13,7 @@ export class bilibili extends plugin{
     {
       reg: '^#*(小可莉)?清(空|除)(b站|B站|哔哩哔哩|bili|bilibili)缓存$',
       fnc: 'ggg',
+      permission: 'master',
     },
     {
       reg: '^#*(小可莉)?(强制)?刷新(b站|B站|哔哩哔哩|bili|bilibili)ck$',
@@ -36,6 +37,7 @@ export class bilibili extends plugin{
 
 async sm(e){
   if(!await this.Check()) return false
+ if (!e.isMaster) return false
   return bili.sm(e)
 }
 
@@ -169,6 +171,7 @@ if(e) return e.reply('已清空bilibili缓存')
 
 async sx(e){
  if(!await this.Check()) return false
+   if (!e.isMaster) return false
   if(e.msg.includes('强制')) return bili.sx_ck(e,true)
   return bili.sx_ck(e)
 }
