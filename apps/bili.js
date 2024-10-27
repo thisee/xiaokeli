@@ -80,7 +80,7 @@ async b(e){
         }else{
           source = (await e.friend.getChatHistory((e.source ?.time + 1), 1)).pop()
     }
-  if (source.message.length!=1&&(source.message[0].type!='image'||source.message[0].type!='json'))  return false
+  if (source.message.length!=1&&(source.message[0]?.type!='image'||source.message[0]?.type!='json'))  return false
 
   if(source.message[0].type=='image'){
   
