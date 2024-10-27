@@ -60,15 +60,15 @@ async b(e){
    return bili.video(e,bv)
   }
   if(e.msg.includes('https://www.bilibili.com/video/')){
-   bv=e.msg.match('https://www.bilibili.com/video/(.*?)/\\?')
-   bv=bv[1]
+   bv=e.msg.match('https://www.bilibili.com/video/([\\w]+)')
    if(!bv) return false
+   bv=bv[1]
    return bili.video(e,bv)
   }
   if(e.msg.includes('https://m.bilibili.com/video/')){
-   bv=e.msg.match('https://m.bilibili.com/video/(.*?)/\\?')
-   bv=bv[1]
+   bv=e.msg.match('https://m.bilibili.com/video/([\\w]+)')
    if(!bv) return false
+   bv=bv[1]
    return bili.video(e,bv)
   }
   //回复bot

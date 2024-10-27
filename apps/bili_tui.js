@@ -65,15 +65,15 @@ async jx(e){
    return bili.video(e,bv)
   }
   if(msg.includes('https://www.bilibili.com/video/')){
-   bv=msg.match('https://www.bilibili.com/video/(.*?)/')
-   bv=bv[1]
+   bv=msg.match('https://www.bilibili.com/video/([\\w]+)')
    if(!bv) return false
+   bv=bv[1]
    return bili.video(e,bv)
   }
   if(msg.includes('https://m.bilibili.com/video/')){
-   bv=msg.match('https://m.bilibili.com/video/(.*?)/')
-   bv=bv[1]
+   bv=msg.match('https://m.bilibili.com/video/([\\w]+)')
    if(!bv) return false
+   bv=bv[1]
    return bili.video(e,bv)
   }
 }
@@ -82,9 +82,9 @@ async getbv(url){
    let res=await fetch(url)
    if(res.status!=200) return false
    url=res.url
-   let bv=url.match('https://www.bilibili.com/video/(.*?)/')
-   bv=bv[1]
+   let bv=url.match('https://www.bilibili.com/video/([\\w]+)')
    if(!bv) return false
+   bv=bv[1]
    return bv
 }
 
