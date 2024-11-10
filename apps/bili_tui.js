@@ -107,7 +107,7 @@ if(!old_time) await yaml.set(path,`${id}_time`,time)
 if(old_time>=time) continue
 const up=await bili.up_xx(false,id)
 if(!up) continue
-const msg=[segment.image(up.face),'\nup主名字：',up.name,'\n\n最新视频：https://www.bilibili.com/video/',bv,'/','\n',segment.image(data.pic),'\n发稿时间：',moment(new Date(time*1000)).format("MM-DD HH:mm"),'\b标题：',data.title]
+const msg=[segment.image(up.face),'\nup主名字：',up.name,'\n\n最新视频：https://www.bilibili.com/video/',bv,'/','\n',segment.image(data.pic),'\n发稿时间：',moment(new Date(time*1000)).format("MM-DD HH:mm"),'\n标题：',data.title]
    for (let group of groups) {
 Bot.pickGroup(group).sendMsg(msg)
 await common.sleep(lodash.random(10000, 20000))
