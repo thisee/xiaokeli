@@ -49,9 +49,13 @@ export default class MysApi {
 
     if (query) url += `?${query}`
     if (body) body = JSON.stringify(body)
-
-    let headers = this.getHeaders(query, body)
-
+    let headers
+    if(data.headers_){
+    data.headers_['DS']=this.getDs(query, body)
+    headers = data.headers_
+    }else{
+    headers = this.getHeaders(query, body)
+    }
     return { url, headers, body }
   }
 
@@ -91,7 +95,7 @@ export default class MysApi {
   }
 
   async getData(type, data = {}, cached = false) {
-    if (!this._device_fp && !data?.Getfp && !data?.headers?.['x-rpc-device_fp']) {
+    if (!this._device_fp && !data?.Getfp && !data?.headers?.['x-rpc-device_fp']&&!data.headers_) {
       this._device_fp = await this.getData('getFp', {
         seed_id: this.generateSeed(16),
         Getfp: true
@@ -112,7 +116,7 @@ export default class MysApi {
       headers = { ...headers, ...data.headers }
     }
 
-    if (type !== 'getFp' && !headers['x-rpc-device_fp'] && this._device_fp.data?.device_fp) {
+    if (type !== 'getFp' && !headers['x-rpc-device_fp'] && this._device_fp.data?.device_fp&&!data.headers_) {
       headers['x-rpc-device_fp'] = this._device_fp.data.device_fp
     }
 

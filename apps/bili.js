@@ -143,8 +143,8 @@ async getbv(url){
    if(res.status!=200) return false
    url=res.url
    let bv=url.match('https://www.bilibili.com/video/(.*?)/')
-   bv=bv[1]
    if(!bv) return false
+   bv=bv[1]
    return bv
 }
 
