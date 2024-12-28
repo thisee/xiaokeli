@@ -1,5 +1,6 @@
 //容易爆验证码，谨慎使用，米游社的面板数据与enka的会有小数点后几位的小许偏差
 //2024-10-18 目前只写了原神和星铁的4星5星圣遗物(遗器)识别
+//2024-12-28 喵喵已有人写了该功能，暂时小同步下(之后可能考虑删除)，为了避免命令冲突，必须加m前缀
 import ProfileList from '../system/copy/ProfileList.js'
 import fs from 'node:fs'
 import { yaml, MysInfo } from '#xiaokeli'
@@ -20,23 +21,24 @@ export class mysmb extends plugin {
             priority: -123456789,
             rule: [{
                 /** 命令正则匹配 */
-                reg: '^#?(星铁)?(小可莉|米游社|m)更新面板$',
+                reg: '^#?(星铁)?(小可莉|m)更新面板$',
                 /** 执行方法 */
                 fnc: 'mys'
-            }, {
-                /** 命令正则匹配 */
-                reg: '^#?小可莉面板文件(替换|还原)$',
-                /** 执行方法 */
-                fnc: 'mbwj'
-            }, ]
+             }, //{
+                // /** 命令正则匹配 */
+                // reg: '^#?小可莉面板文件(替换|还原)$',
+                // /** 执行方法 */
+                // fnc: 'mbwj'
+            // }, 
+            ]
         });
     }
     async mys(e) {
-       if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
-            if (!e.isMaster) return false
-            e.reply('首次使用该功能，需要修改喵佬的models/avatar/ProfileAvatar.js文件,请发送：小可莉面板文件替换\n\n后续更新miao-plugin，如果因为该文件引发冲突，可使用:小可莉面板文件还原')
-            return false
-        }
+       // if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
+            // if (!e.isMaster) return false
+            // e.reply('首次使用该功能，需要修改喵佬的models/avatar/ProfileAvatar.js文件,请发送：小可莉面板文件替换\n\n后续更新miao-plugin，如果因为该文件引发冲突，可使用:小可莉面板文件还原')
+            // return false
+        // }
         let CD = (await yaml.get('./plugins/xiaokeli/config/config.yaml')).mbCD
         if (!e.game) e.game = 'gs'
         let uid = e.user.getUid()
@@ -192,7 +194,7 @@ export class mysmb extends plugin {
                     'promote': v.weapon.promote_level,
                     'affix': v.weapon.affix_level
                 },
-                '_source': 'mys',
+                '_source': 'mysPanel',
                 '_time': new Date().getTime(),
                 '_update': new Date().getTime(),
                 '_talent': new Date().getTime(),
@@ -632,7 +634,7 @@ export class mysmb extends plugin {
                     'affix': v.equip.rank
                 } : null,
                 'artis': artis,
-                '_source': 'mys',
+                '_source': 'mysPanel',
                 '_time': new Date().getTime(),
                 '_update': new Date().getTime(),
                 '_talent': new Date().getTime()
@@ -643,25 +645,25 @@ export class mysmb extends plugin {
         fs.writeFileSync(path, JSON.stringify(mb), 'utf-8')
     }
 
-async mbwj(e){
- if (!e.isMaster) return false
-  if(e.msg.includes('替换')){
-  fs.cpSync('./plugins/miao-plugin/models/avatar/ProfileAvatar.js','./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
-  fs.cpSync('./plugins/xiaokeli/system/copy/ProfileAvatar.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
-  await e.reply('文件替换完成,准备重启~', true)
-  new Restart(e).restart()
-  return true
-  }else{
-  if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
-  await e.reply('没找到原文件。。。', true)
-    return true
-  }
-  fs.cpSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
-  fs.unlinkSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
-  e.reply('文件还原成功！', true)
-  return
-  }
-}
+// async mbwj(e){
+ // if (!e.isMaster) return false
+  // if(e.msg.includes('替换')){
+  // fs.cpSync('./plugins/miao-plugin/models/avatar/ProfileAvatar.js','./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
+  // fs.cpSync('./plugins/xiaokeli/system/copy/ProfileAvatar.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
+  // await e.reply('文件替换完成,准备重启~', true)
+  // new Restart(e).restart()
+  // return true
+  // }else{
+  // if(!fs.existsSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')){
+  // await e.reply('没找到原文件。。。', true)
+    // return true
+  // }
+  // fs.cpSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js','./plugins/miao-plugin/models/avatar/ProfileAvatar.js')
+  // fs.unlinkSync('./plugins/xiaokeli/system/default/ProfileAvatar_copy.js')
+  // e.reply('文件还原成功！', true)
+  // return
+  // }
+// }
 
 
 

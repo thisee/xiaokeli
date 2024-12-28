@@ -61,7 +61,6 @@ pnpm i
 ## 星铁攻略图源
 |                           星铁攻略图的作者大大                |
 |:-------------------------------------------------------------:|
-|      [小橙子阿](https://m.miyoushe.com/dby/#/collection/1998643)      | 
 |      [HoYo青枫](https://m.miyoushe.com/dby/#/collection/1998324)      | 
 |     [紫喵Azunya](https://m.miyoushe.com/dby/#/collection/2145977)     |
 
