@@ -90,15 +90,15 @@ logger.mark(`[小可莉]没有${name_}攻略1,作者大大还没有制作`)
 
 
 //小橙子阿
-url=u+'1998643'
-name_=await this.mz(name,1)
-tu = path+'/1/'+name_+'.jpg'
-if(await this.getData(name_,url,1,60)){
-logger.mark(`[小可莉]下载${name_}攻略2`)
- imgs.push(segment.image(tu))
-}else{
-logger.mark(`[小可莉]没有${name_}攻略2,作者大大还没有制作`)
-}
+// url=u+'1998643'
+// name_=await this.mz(name,1)
+// tu = path+'/1/'+name_+'.jpg'
+// if(await this.getData(name_,url,1,60)){
+// logger.mark(`[小可莉]下载${name_}攻略2`)
+ // imgs.push(segment.image(tu))
+// }else{
+// logger.mark(`[小可莉]没有${name_}攻略2,作者大大还没有制作`)
+// }
 
 
 // HoYo青枫
@@ -159,17 +159,17 @@ imgs.push(segment.image(tu))
 }
 
 //小橙子阿
-url=u+'1998643'
-name_=await this.mz(name,1)
-tu = path+'/1/'+name_+'.jpg'
-if(fs.existsSync(tu)){
-  imgs.push(segment.image(tu))
-}else{
-if(await this.getData(name_,url,1,60,e)){
-logger.mark(`[小可莉]下载${name_}攻略2`)
-imgs.push(segment.image(tu))
-}
-}
+// url=u+'1998643'
+// name_=await this.mz(name,1)
+// tu = path+'/1/'+name_+'.jpg'
+// if(fs.existsSync(tu)){
+  // imgs.push(segment.image(tu))
+// }else{
+// if(await this.getData(name_,url,1,60,e)){
+// logger.mark(`[小可莉]下载${name_}攻略2`)
+// imgs.push(segment.image(tu))
+// }
+// }
 
 // HoYo青枫
 url=u+'1998324'
@@ -265,9 +265,9 @@ url_=u+'2145977'
 i_=this.mz(i)
 await this.getData(i_,url_)
 //小橙子阿
-url_=u+'1998643'
-i_=this.mz(i,1)
-await this.getData(i_,url_,1,60)
+// url_=u+'1998643'
+// i_=this.mz(i,1)
+// await this.getData(i_,url_,1,60)
 //HoYo青枫
 url_=u+'1998324'
 i_=this.mz(i,2)
