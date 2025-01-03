@@ -210,13 +210,13 @@ async fsyy (e) {
   if(!xh) return false
   let n=xh-1
   let type
-  if(['日语','日文'].includes(e.msg)){
+  if(e.msg.includes('日语')||e.msg.includes('日文')){
   type='日语'
-  }else if(['中文','汉语','华语'].includes(e.msg)){
+  }else if(e.msg.includes('汉语')||e.msg.includes('中文')||e.msg.includes('华语')){
   type='汉语'
-  }else if(['英语','英文','外语'].includes(e.msg)){
+  }else if(e.msg.includes('外语')||e.msg.includes('英语')||e.msg.includes('英文')){
   type='英语'
-  }else if(['韩语','韩文'].includes(e.msg)){
+  }else if(e.msg.includes('韩语')||e.msg.includes('韩文')){
   type='韩语'
   }else if(/^([0-9]|[0-9][0-9]|[1][0-9][0-9])$/.test(e.msg)){
   type='汉语'
