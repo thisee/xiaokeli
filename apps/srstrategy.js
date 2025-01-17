@@ -200,21 +200,28 @@ async getData (name,url,x=false,q_=20,e) {
     let imgs=[]
     let sfPath=path+'/0/'+name+'.jpg'
     for(let val of res){
-    if(val.post.subject.includes(name)){
+    if(name=='黑塔'){
+    if(val.post.subject.includes(name) && !val.post.subject.includes('大黑塔')){
     //小橙子阿,取前三个
-    if(x==1){
-      sfPath=path+'/1/'+name+'.jpg'
-      let list=[]
-      for (let n in val.image_list) {
-        if(n<4) list.push(val.image_list[n])
-      }
-    val.image_list=list
-    }
+    // if(x==1){
+      // sfPath=path+'/1/'+name+'.jpg'
+      // let list=[]
+      // for (let n in val.image_list) {
+        // if(n<4) list.push(val.image_list[n])
+      // }
+    // val.image_list=list
+    // }
     if(x==2){
       sfPath=path+'/2/'+name+'.jpg'
     }
     imgs.push(_.maxBy(val.image_list, (v) => v.height).url)
+    }}else{
+    if(val.post.subject.includes(name)){
+    if(x==2){
+      sfPath=path+'/2/'+name+'.jpg'
     }
+    imgs.push(_.maxBy(val.image_list, (v) => v.height).url)
+    }}
     }
     
     if(!imgs.length) return false
