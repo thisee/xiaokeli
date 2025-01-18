@@ -115,13 +115,21 @@ async function vid(e,thise=false) {
  if (msgs.length) {
   let msg = await Bot.makeForwardMsg(msgs)
     // msg=await common.makeForwardMsg(e, msg,`小可莉发现了新视频，一起来看看吧！\n这次的游戏有：${names}`)
-    msg.data.meta.detail.news=[]
     let botname=(await yaml.get('./plugins/xiaokeli/config/config.yaml')).botname || ''
+    if(msg.data.meta){
+    msg.data.meta.detail.news=[]
     //合并消息的外层文案
     let text={
       'text':`${botname}发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
     }
     msg.data.meta.detail.news.push(text)
+    }else{
+    msg.data.unshift({
+    nickname: Bot.nickname,
+    user_id: Bot.uin,
+    message: `${botname}发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
+    })
+    }
    if (thise) {
    e.reply(msg)
    return true

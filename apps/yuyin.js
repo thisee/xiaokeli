@@ -1,7 +1,7 @@
 import gsCfg from '../../genshin/model/gsCfg.js'
-import cfg from'../../../lib/config/config.js'
 import fs from 'fs'
 import { uploadRecord,yyjson,yaml,render,mys } from '#xiaokeli'
+import { Version } from '../../miao-plugin/components/index.js'
 const path = process.cwd();
 
 export class jsyy extends plugin {
@@ -51,6 +51,7 @@ if(e.msg && e.msg.length>7){
   }
 if (!e.isMaster) return false
 if(e.msg.includes('开')){
+if(Version.name=='TRSS-Yunzai') return e.reply('TRSS-yunzai暂不支持使用超清语音，无法开启')
 await yaml.set(path+'/plugins/xiaokeli/config/config.yaml','voice',true)
 await e.reply('已开启超清语音，⚠️pc端QQ无法听取超清语音')
 }else{
@@ -270,13 +271,13 @@ let data =await redis.get(`xiaokeli_yy:${source.time}`)
   let kg=await this.check()
   if(table[n].content=='？？？') return logger.error('[小可莉]相关语言暂未公布')
    logger.mark(`\x1B[36m${yy}\x1B[0m`)
-   //由于高版本QQ的私聊可能无法听取普通语音，所以在没开超清语音时，私聊bot发的语音采取低音质处理,至少我没有放弃私聊，好的该继续摆烂了
    let vo
    if(e.isGroup){
     if(kg.voice) vo=await uploadRecord(yy,0,false)
            else   vo=segment.record(yy)
    }else{
-      vo=await uploadRecord(yy,0,!kg.voice)
+      if(Version.name=='TRSS-Yunzai')  vo=segment.record(yy)
+         else  vo=await uploadRecord(yy,0,!kg.voice)
    }
     await e.reply(`[简述]:${table[n].name}\n[内容]:${table[n].content.replace(/\n| /g,'')}`)
     e.reply(vo)
