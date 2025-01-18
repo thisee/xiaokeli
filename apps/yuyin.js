@@ -197,8 +197,7 @@ return false
 
 async fsyy (e) {
   if (!e.source)  return false
-  //用cfg.qq代替Bot.uin,兼容trss-yunzai
-  if (Number(e.source.user_id) !== cfg.qq)   return false
+  // if (Number(e.source.user_id) !== Bot.uin)   return false
   // if (!/^\[图片]$/.test(e.source.message)) return false
   let source
   if (e.isGroup) {
