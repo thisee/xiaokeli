@@ -1,4 +1,5 @@
 import gsCfg from '../../genshin/model/gsCfg.js'
+import cfg from'../../../lib/config/config.js'
 import fs from 'fs'
 import { uploadRecord,yyjson,yaml,render,mys } from '#xiaokeli'
 const path = process.cwd();
@@ -196,7 +197,8 @@ return false
 
 async fsyy (e) {
   if (!e.source)  return false
-  if (Number(e.source.user_id) !== Bot.uin)   return false
+  //用cfg.qq代替Bot.uin,兼容trss-yunzai
+  if (Number(e.source.user_id) !== cfg.qq)   return false
   // if (!/^\[图片]$/.test(e.source.message)) return false
   let source
   if (e.isGroup) {
@@ -210,13 +212,13 @@ async fsyy (e) {
   if(!xh) return false
   let n=xh-1
   let type
-  if(e.msg.includes('日语')||e.msg.includes('日文')){
+  if(/日语|日文/.test(e.msg)){
   type='日语'
-  }else if(e.msg.includes('汉语')||e.msg.includes('中文')||e.msg.includes('华语')){
+  }else if(/汉语|中文|华语/.test(e.msg)){
   type='汉语'
-  }else if(e.msg.includes('外语')||e.msg.includes('英语')||e.msg.includes('英文')){
+  }else if(/外语|英语|英文/.test(e.msg)){
   type='英语'
-  }else if(e.msg.includes('韩语')||e.msg.includes('韩文')){
+  }else if(/韩语|韩文/.test(e.msg)){
   type='韩语'
   }else if(/^([0-9]|[0-9][0-9]|[1][0-9][0-9])$/.test(e.msg)){
   type='汉语'
