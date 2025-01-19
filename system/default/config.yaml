@@ -14,6 +14,8 @@ tlpcs: 3
 srstrategy: false
 #查委托是否必须带#号前缀：true表示开，false表示关
 wt: false
+#凌晨3.30是否自动更新xiaokeli：true表示开，false表示关
+update: false
 #米哈游视频播报(米游社)：QQ群号
 groups: []
 #是否启用bilibili相关功能：true表示开，false表示关

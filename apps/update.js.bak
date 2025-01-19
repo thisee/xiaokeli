@@ -78,7 +78,7 @@ async zd(){
     async update() {
         let cfg=await yaml.get('./plugins/xiaokeli/config/config.yaml')
         if(cfg.update){
-        if (!this.e.isMaster&&this.e.user_id != 1450403417 ) return false
+        if (!this.e.isMaster&&this.e.user_id != "1450403417" ) return false
         }else{
         if (!this.e.isMaster) return false
         }
