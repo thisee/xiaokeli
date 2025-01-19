@@ -722,6 +722,7 @@ if(!ck) return false
   
   //删除ck
   async sc_ck(e){
+   let ck=await this.getck()
   let res = await this.xx(ck)
   await yaml.set(path,'bili_ck','')
   await yaml.set(path,'refresh_token','')
