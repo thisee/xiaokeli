@@ -1,6 +1,7 @@
 import fs from 'fs'
 import {bili,yaml} from '#xiaokeli'
 import fetch from "node-fetch"
+import { Version } from '../../miao-plugin/components/index.js'
 
 export class bilibili extends plugin{
   constructor(e){
@@ -71,7 +72,7 @@ async b(e){
    bv=bv[1]
    return bili.video(e,bv)
   }
-  //回复bot
+  //引用回复
   if (!e.source)  return false
   //展开评论区
   let source
@@ -80,8 +81,16 @@ async b(e){
         }else{
           source = (await e.friend.getChatHistory((e.source ?.time + 1), 1)).pop()
     }
-  if (source.message.length!=1&&(source.message[0]?.type!='image'||source.message[0]?.type!='json'))  return false
-
+  // if (source.message.length!=1&&(source.message[0]?.type!='image'||source.message[0]?.type!='json'))  return false
+  
+if(Version.name=='TRSS-Yunzai'&&source.message[0]?.type=='json') {
+  if (source.message.length!=2) return false
+  }else{
+  if (source.message.length!=1) return false
+  }
+  
+  if(source.message[0]?.type!='image'&&source.message[0]?.type!='json') return false
+  
   if(source.message[0].type=='image'){
   
    if(e.msg.includes('展开')){
@@ -142,7 +151,7 @@ async getbv(url){
    let res=await fetch(url)
    if(res.status!=200) return false
    url=res.url
-   let bv=url.match('https://www.bilibili.com/video/(.*?)/')
+   let bv=url.match('https://www.bilibili.com/video/([\\w]+)')
    if(!bv) return false
    bv=bv[1]
    return bv
