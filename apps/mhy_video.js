@@ -31,8 +31,7 @@ export class video extends plugin{
     },
     ]})
     this.task = {
-    
-				cron:  '0 1/10 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,21,22,23 * * ?'
+				cron:  '0 1/10 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,21,22,23 * * ?',
 				name: "[小可莉]米哈游视频",
 				fnc: () => vid(),
 				log: false
@@ -57,7 +56,7 @@ export class video_ extends plugin{
   rule: []})
     this.task = {
     
-				cron:  '30 0/2 12,20 * * ? '
+				cron:  '30 0/2 12,20 * * ? ',
 				name: "[小可莉]米哈游最新视频",
 				fnc: () => vid(),
 				log: false
