@@ -70,7 +70,7 @@ async function vid(e,thise=false) {
   //原神，星铁，绝区零
   let urls = ['https://bbs-api.miyoushe.com/post/wapi/userPost?size=10&uid=75276539','https://bbs-api.miyoushe.com/post/wapi/userPost?size=10&uid=288909600','https://bbs-api.miyoushe.com/post/wapi/userPost?size=10&uid=152039148']
   //啊～量有点多
-  let list,p,size,time,subject,content,img,vid_url,res,vod_list,url,name,ti,msgs=[],names='',path
+  let list,p,size,time=1,subject,content,img,vid_url,res,vod_list,url,name,ti,msgs=[],names='',path
   //遍历3游戏官号
   for (let i = 0;i<urls.length;i++) {
   let msg={}
