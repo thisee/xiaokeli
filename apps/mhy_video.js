@@ -5,16 +5,17 @@ import fs from 'fs'
 import {yaml} from '#xiaokeli'
 import schedule from 'node-schedule'
 
-//区分一下时间段，重点中午12点，晚上8点，其余时间10分钟一次
-let cron = '0 1/10 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,21,22,23 * * ?'
-//每隔 2 分钟, 从一小时内的第 0.5 分钟开始, 在 12:00~12:59:59 和 20:00~20:59:59
-let cron1 = '30 0/2 12,20 * * ? '
-schedule.scheduleJob(cron, () => {
-    vid()
-})
-schedule.scheduleJob(cron1, () => {
-    vid()
-})
+// //区分一下时间段，重点中午12点，晚上8点，其余时间10分钟一次
+// let cron = '0 1/10 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,21,22,23 * * ?'
+// //每隔 2 分钟, 从一小时内的第 0.5 分钟开始, 在 12:00~12:59:59 和 20:00~20:59:59
+// let cron1 = '30 0/2 12,20 * * ? '
+// schedule.scheduleJob(cron, () => {
+    // vid()
+// })
+// schedule.scheduleJob(cron1, () => {
+    // vid()
+// })
+
 //手动触发，只回复当前聊天
 export class video extends plugin{
   constructor(e){
@@ -29,7 +30,13 @@ export class video extends plugin{
       fnc: 'video',
     },
     ]})
+    this.task = {
     
+				cron:  '0 1/10 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,21,22,23 * * ?'
+				name: "[小可莉]米哈游视频",
+				fnc: () => vid(),
+				log: false
+      }
   }
   
 async video(e) {
@@ -37,6 +44,24 @@ async video(e) {
   await redis.set(`xiaokeli_vid:1`,123)
   await redis.set(`xiaokeli_vid:2`,123)
   vid(e,true)
+  }
+}
+
+export class video_ extends plugin{
+  constructor(e){
+  super({
+  name: '[小可莉]米哈游视频',
+  dsc: '',
+  event: 'message',
+  priority: 1,
+  rule: []})
+    this.task = {
+    
+				cron:  '30 0/2 12,20 * * ? '
+				name: "[小可莉]米哈游最新视频",
+				fnc: () => vid(),
+				log: false
+      }
   }
 }
 

@@ -149,7 +149,7 @@ async f9(e) {
  
 async sz(e){
   let data = await yaml.get(path)
-  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n语音列表撤回时间：${data.time}秒\n米游社更新面板CD：${data.mbCD}秒\n星铁攻略：${data.srstrategy ? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt ? '已开启' :'已关闭'}\nb站相关功能：${data.bilibili ? '已开启' :'已关闭'}\n凌晨3.30自动更新xiaokeli：${data.update ? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
+  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n语音列表撤回时间：${data.time}秒\n米游社更新面板CD：${data.mbCD}秒\n星铁攻略：${data.srstrategy ? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt ? '已开启' :'已关闭'}\nb站相关功能：${data.bilibili ? '已开启' :'已关闭'}\n凌晨3:30自动更新xiaokeli：${data.update ? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
   for (let group of data.groups) {
   try{
     Bot.pickGroup(group, true)
