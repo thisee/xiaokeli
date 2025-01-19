@@ -17,7 +17,7 @@ export class bilibili extends plugin{
       permission: 'master',
     },
     {
-      reg: '^#*(小可莉)?(强制)?刷新(b站|B站|哔哩哔哩|bili|bilibili)ck$',
+      reg: '^#*(小可莉)?(强制刷新|刷新|删除)(b站|B站|哔哩哔哩|bili|bilibili)ck$',
       fnc: 'sx',
     },
     {
@@ -181,8 +181,12 @@ if(e) return e.reply('已清空bilibili缓存')
 async sx(e){
  if(!await this.Check()) return false
    if (!e.isMaster) return false
+  if(e.msg.includes('刷新')){
   if(e.msg.includes('强制')) return bili.sx_ck(e,true)
   return bili.sx_ck(e)
+  }else{
+  return bili.sc_ck(e)
+  }
 }
 
 async Check(){

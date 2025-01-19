@@ -720,6 +720,15 @@ if(!ck) return false
           ])
   }
   
+  //删除ck
+  async sc_ck(e){
+  let res = await this.xx(ck)
+  await yaml.set(path,'bili_ck','')
+  await yaml.set(path,'refresh_token','')
+  e.reply(`B站账号：${res.uname}\n删除完成`)
+  }
+  
+  
 }
 export default new bili()
 
