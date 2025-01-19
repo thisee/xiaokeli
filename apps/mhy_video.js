@@ -39,9 +39,9 @@ export class video extends plugin{
   }
   
 async video(e) {
-  await redis.set(`xiaokeli_vid:0`,123)
-  await redis.set(`xiaokeli_vid:1`,123)
-  await redis.set(`xiaokeli_vid:2`,123)
+  await redis.del('xiaokeli_vid:0')
+  await redis.del('xiaokeli_vid:1')
+  await redis.del('xiaokeli_vid:2')
   vid(e,true)
   }
 }
