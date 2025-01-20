@@ -77,13 +77,13 @@ async data(name='',type='js',isSr=false){
       }
       }
       
-      if(va.title==name) return { id,icon,ji,yuansu,wuqi,shux,mingtu}
+      if(va.title.replace(/ /g,'')==name) return { id,icon,ji,yuansu,wuqi,shux,mingtu}
     }
     return false
   }else{
     let names=[],ids=[],icons=[],jis=[],yuansus=[],wuqis=[],shuxs=[],mingtus=[]
     for (let n in list) {
-      names.push(list[n].title)
+      names.push(list[n].title.replace(/ /g,''))
       ids.push(list[n].content_id)
       icons.push(list[n].icon)
     if(type!='syw'){

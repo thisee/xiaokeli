@@ -7,7 +7,7 @@ let url=`https://api-takumi-static.mihoyo.com/hoyowiki/genshin/wapi/entry_page?a
 let data =await (await fetch(url)).json()
 let name =data.data.page.name
 let n=14
-if(name=='旅行者（空）'||name=='旅行者（荧）'){
+if(name.replace(/ /g,'')=='旅行者（空）'||name.replace(/ /g,'')=='旅行者（荧）'){
 n=10
 }
 data=data.data.page.modules[n].components[0].data

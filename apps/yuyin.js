@@ -138,7 +138,7 @@ let img=false
 let isSr=false
 let data,yy,table
 let background=path+'/plugins/xiaokeli/resources/yytable/bg0.png'
-if(['4074','4073'].includes(gs_id)) background=path+'/plugins/xiaokeli/resources/yytable/bg.png'
+if([4074,4073].includes(gs_id)) background=path+'/plugins/xiaokeli/resources/yytable/bg.png'
 if(gs_id) {
 list=await yyjson.gs_download(gs_id)
 if(!(list?.length>1)) return e.reply('暂时没有该角色语音💔')
