@@ -5,14 +5,12 @@
   font-style: normal;
 }
 body {
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 1000px;
   transform-origin: 0 0 0;
 }
-* {
-  margin: 0;
-  padding: 0;
+.z{
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .bt{
 	padding-top: 20px;
