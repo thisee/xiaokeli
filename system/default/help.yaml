@@ -27,6 +27,8 @@
   list:
     - title: '小可莉b站登录'
       desc: '扫码登录绑定b站账号，不绑定b站，b站功能都没法用'
+    - title: 'b站账号'
+      desc: '查看绑定的b站账号'
     - title: '刷新b站ck'
       desc: 'ck过期就刷新下'
     - title: '删除b站ck'

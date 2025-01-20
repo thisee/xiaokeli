@@ -19,8 +19,10 @@ export class bilibili extends plugin{
     {
       reg: '^#*(小可莉)?(强制刷新|刷新|删除)(b站|B站|哔哩哔哩|bili|bilibili)ck$',
       fnc: 'sx',
-    },
-    {
+    },{
+      reg: '^#*(小可莉)?(查看)*(我的)*(b站|B站|哔哩哔哩|bili|bilibili)账号$',
+      fnc: 'zh',
+    },{
       reg: '^#*(小可莉)?(b站|B站|哔哩哔哩|bili|bilibili)(扫码)?登(录|路|陆)$',
       fnc: 'sm',
     },{
@@ -40,6 +42,12 @@ async sm(e){
   if(!await this.Check()) return false
  if (!e.isMaster) return false
   return bili.sm(e)
+}
+
+async zh(e){
+  if(!await this.Check()) return false
+ if (!e.isMaster) return false
+return bili.zhanghao(e)
 }
 
 async b(e){

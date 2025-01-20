@@ -729,6 +729,21 @@ if(!ck) return false
   e.reply(`B站账号：${res.uname}\n删除完成`)
   }
   
+  async zhanghao(e){
+  let ck=await this.getck()
+  let res = await this.xx(ck)
+  e.reply([
+          segment.image(res.face),
+          `\n账号：${res.uname}
+          \nuid：${res.mid}
+          \n用户等级：Lv.${res.level_info.current_level}
+          \n硬币：${res.money}
+          `
+          ])
+  }
+  
+  
+  
   
 }
 export default new bili()

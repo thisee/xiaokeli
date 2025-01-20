@@ -15,40 +15,28 @@ export class pz extends plugin {
           fnc: 'f1',
           permission: 'master'
               },{
-          reg: `^#*${xx}塔罗牌(开启|关闭)$`,
+          reg: `^#*${xx}(塔罗牌|自动更新|星铁攻略(图)?|b站|B站|哔哩哔哩|bili|bilibili)?(开启|关闭)((查)?委托前缀)?$`,
           fnc: 'f2',
           permission: 'master'
               },{
           reg: `^#*${xx}塔罗牌(每日)?次数(\\d+)$`,
           fnc: 'f3',
           permission: 'master'
-              },{
+            },{
           reg: `^#*(${xx})?语音列表(撤回)?时间(\\d+)$`,
           fnc: 'f4',
-          permission: 'master'
-          },{
-          reg: `^#*${xx}星铁攻略(图)?(开启|关闭)$`,
-          fnc: 'f5',
           permission: 'master'
           },{
           reg: `^#*(小可莉)?(设置)?(添加|删除)播报群(号)?(.*)$`,
           fnc: 'f6',
           permission: 'master'
-          }, {
-          reg: '^#*(小可莉)?(设置)?(开启|关闭)(查)?委托前缀$',
+          },{
+          reg: '^#*(开启|关闭)(查)?委托前缀$',
           fnc: 'f7',
           permission: 'master'
          },{
           reg: `^#*${xx}面板(cd|CD)(.*)$`,
           fnc: 'f8',
-          permission: 'master'
-         },{
-          reg: `^#*${xx}(b站|B站|哔哩哔哩|bili|bilibili)(开启|关闭)$`,
-          fnc: 'f9',
-          permission: 'master'
-         },{
-          reg: `^#*${xx}自动更新(开启|关闭)$`,
-          fnc: 'f10',
           permission: 'master'
          }
       ]
@@ -59,10 +47,18 @@ export class pz extends plugin {
      }
 
   async f2(e) {
+  let type=e.msg.replace(/#|小可莉|设置/g,'')
+  let k
+  if(/塔罗牌/.test(type)) k='tlp'
+  else if(/星铁攻略/.test(type)) k='srstrategy'
+  else if(/委托前缀/.test(type)) k='wt'
+  else if(/b站|B站|哔哩哔哩|bili|bilibili/.test(type)) k='bilibili'
+  else if(/自动更新/.test(type)) k='update'
+  if(!k) return false
    if(e.msg.includes('开')){
-     await yaml.set(path,'tlp',true)
+     await yaml.set(path,k,true)
    }else{
-     await yaml.set(path,'tlp',false)
+     await yaml.set(path,k,false)
    }
    this.sz(e)
   }
@@ -79,14 +75,6 @@ async f4(e){
   this.sz(e)
 }
 
-async f5(e){
-  if(e.msg.includes('开')){
-     await yaml.set(path,'srstrategy',true)
-   }else{
-     await yaml.set(path,'srstrategy',false)
-   }
-  this.sz(e)
-}
 
 async f6(e){
 let group_id=await (/\d+/).exec(e.msg)
@@ -127,23 +115,7 @@ await yaml.set(path,'mbCD',Number(cd))
 this.sz(e)
 }
 
-async f9(e) {
-  if(e.msg.includes('开')){
-     await yaml.set(path,'bilibili',true)
-   }else{
-     await yaml.set(path,'bilibili',false)
-   }
-  this.sz(e)
- }
- 
- async f10(e){
-  if(e.msg.includes('开')){
-     await yaml.set(path,'update',true)
-   }else{
-     await yaml.set(path,'update',false)
-   }
-  this.sz(e)
-}
+
  
  
  
