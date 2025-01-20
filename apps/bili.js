@@ -47,7 +47,7 @@ async b(e){
   if(!await this.Check()) return false
   let msg,url,data,res,bv,user_id
   //卡片分享
-  if(e.raw_message=='[json消息]'){
+  if(e.raw_message=='[json消息]'||e.message[0]?.type=='json'){
   bv=await this.json_bv(e.msg)
   if(!bv) return false
   return bili.video(e,bv)
