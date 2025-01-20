@@ -1,7 +1,7 @@
 
 @font-face {
-  font-family: "宋";
-  src: url("../font/宋.ttf");
+  font-family: "i";
+  src: url("../font/i.ttf");
 }
 * {
   margin: 0;
@@ -12,7 +12,7 @@
 
 body {
   font-size: 20px;
-  font-family: "宋";
+  font-family: "i";
 }
 .container {
   width: 930px;

@@ -1,12 +1,11 @@
 @font-face {
-  font-family: "jty";
-  src: url("jty.OTF");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "i";
+  src: url("../font/i.ttf");
 }
 body {
   width: 1000px;
   transform-origin: 0 0 0;
+    font-family: "i";
 }
 .z{
   background-size: cover;

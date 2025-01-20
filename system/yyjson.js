@@ -67,6 +67,9 @@ v++
 }
 let sr_yy=[]
 let n
+if(!data[0].match(/sourcesrc=https:\/\/act-upload.mihoyo.com\/sr-wiki\/(.*?)wav><\/audio><\/div>/g)){
+return logger.error('该角色的语音还没有人上传，过几天再试试吧~')
+}
 for(let i=0;i<4;i++){
 sr_yy[i]=data[i].match(/sourcesrc=https:\/\/act-upload.mihoyo.com\/sr-wiki\/(.*?)wav><\/audio><\/div>/g)
 sr_yy[i].splice(k-1, k)
