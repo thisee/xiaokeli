@@ -90,7 +90,7 @@ async function vid(e,thise=false) {
     if(!ti){
       await redis.set(`xiaokeli_vid:${i}`,time)
       logger.info(`初始化${name}最新视频记录`)
-      break
+      ti=1
     }
    //发布时间戳10位
   time=list[n].post.created_at
