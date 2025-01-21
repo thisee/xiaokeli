@@ -54,7 +54,7 @@
             
             <div class="pl">
               <div class="pl_tab">评论区 {{reply}}</div>
-              {{if reply != 0 }}
+              {{if reply != 0 || pls}}
               {{each pls k}}
               <div class="re">
                 <img class="re_tx" src="{{k.tx}}">
