@@ -487,9 +487,11 @@ left:600px;
 
 
 .pic{
+max-width: 700px;
 max-height: 369px;
 }
 .re_p .pic_{
+max-width: 700px;
 max-height: 100px;
 }
 
