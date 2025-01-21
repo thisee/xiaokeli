@@ -21,7 +21,7 @@ groups: []
 #是否启用bilibili相关功能：true表示开，false表示关
 bilibili: true
 #bilibili视频的主评论区，显示几条评论((1-20)不建议设置过多)
-list_num: 15
+list_num: 10
 #bilibili收藏视频的收藏夹序号(1就是默认收藏夹)
 mlid_n: 1
 #bilibili的Cookie(别手动加,请发送：小可莉b站登录)
