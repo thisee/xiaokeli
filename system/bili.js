@@ -284,7 +284,6 @@ if(!ck) return false
      await this.Check(e,ck)
      return logger.mark('b站评论区获取失败')
     }
-    // if(data.length==0) data='还没有人评论~'
     data=await this.getpl(data)
     //置顶评论
     if(res.data.upper?.top){
@@ -482,7 +481,7 @@ if(!ck) return false
 //处理评论信息
 getpl(data){
   let pls=[]
-  if(typeof(data)!='String'){
+  if(data.length!=0){
   //由评论点赞数从高到低重新排序
   data=data.sort(compare('like'))
   data.map((v)=>{
