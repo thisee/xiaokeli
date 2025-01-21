@@ -146,7 +146,7 @@ if(Version.name=='TRSS-Yunzai'&&source.message[0]?.type=='json') {
   
   if(['关注','取消关注','拉黑','取消拉黑'].includes(e.msg)){
   if(!user_id) user_id=(await bili.sp_(e,bv)).owner.mid
-  return bili.user(e,user_id)
+  return bili.user(e,user_id,bv)
   }
   
   if(e.msg.substring(0, 2)=='评论') return bili.bili_reply(e,bv)

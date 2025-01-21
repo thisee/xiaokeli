@@ -33,7 +33,7 @@ export class bilibili_tui extends plugin{
     }
     ]})
    this.task = {
-				cron: "30 0/5 * * * *", //每5分钟跑一次
+				cron: "45 0/5 * * * *", //每5分钟跑一次
 				name: "[小可莉]bilibili任务",
 				fnc: () => this.ccc(),
 				log: false
