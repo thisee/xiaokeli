@@ -166,11 +166,14 @@ async video(e,bv,_pl_){
   let list_num=(await yaml.get(path)).list_num || 15
   let pls=(await this.pl(bv)).slice(0,list_num)
   
+  let plsl=zh(data.stat.reply)
   if(_pl_){
+   plsl++
   //重复就删除
    for(let i in pls){
    if(pls[i].rpid==_pl_.rpid){
    pls.splice(i, 1)
+   plsl--
    break
    }
    }
@@ -195,10 +198,9 @@ async video(e,bv,_pl_){
     'lv_6': up_data.is_senior_member,
     'online': online,
     'pls': pls,
-    '_reply_': _pl_ ? true : false,
     'view': zh(data.stat.view),
     'danmaku': zh(data.stat.danmaku),
-    'reply': zh(data.stat.reply),
+    'reply': plsl,
     'favorite': zh(data.stat.favorite),
     'share': zh(data.stat.share),
     'like': zh(data.stat.like),
