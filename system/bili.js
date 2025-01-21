@@ -119,7 +119,7 @@ return true
 
 
 //主页
-async video(e,bv){
+async video(e,bv,_pl_){
   let data=await this.sp_(e,bv)
   if(!data) return false
   /*
@@ -150,22 +150,49 @@ async video(e,bv){
   pages[0].cid
   */
   let online=await this.online(data.pages[0].cid,bv)
-  let list_num=(await yaml.get(path)).list_num || 10
+  
+  /*获取up主信息
+    粉丝数量：fans
+    等级：level_info.current_level
+    是否关注: is_gz
+   lv.6是否有小闪电：is_senior_member:0 or 1
+  */
+  let up_data=await this.up_xx(false,data.owner.mid)
+  /*
+  判断视频是否点赞，投币，收藏       like,coins,favoured
+  */
+  let san=await this.san_(bv)
+  
+  let list_num=(await yaml.get(path)).list_num || 15
   let pls=(await this.pl(bv)).slice(0,list_num)
   
+  if(_pl_){
+  //重复就删除
+   for(let i in pls){
+   if(pls[i].rpid==_pl_.rpid){
+   pls.splice(i, 1)
+   break
+   }
+   }
+   pls=[_pl_,...pls]
+  }
   data={
     // 'p': data.videos,
     'bv':data.bvid,
-    'copyright': data.copyright,
+    // 'copyright': data.copyright,
     'pic': data.pic,
     'title': data.title,
     'desc': data.desc,
-    'ctime':moment(new Date(data.ctime*1000)).format("MM-DD HH:mm"),
-    'pubdate':moment(new Date(data.pubdate*1000)).format("MM-DD HH:mm"),
+    // 'ctime':moment(new Date(data.ctime*1000)).format("YY-MM-DD HH:mm"),
+    'pubdate':moment(new Date(data.pubdate*1000)).format("YY-MM-DD HH:mm"),
     'time': formatSeconds(data.duration),
     'name': data.owner.name,
     'tx': data.owner.face,
     'up_id':data.owner.mid,
+    'fans': zh(up_data.fans),
+    'is_gz': up_data.is_gz,
+    'lv': up_data.level_info.current_level,
+    'lv_6': up_data.is_senior_member,
     'online': online,
     'pls': pls,
     'view': zh(data.stat.view),
@@ -175,6 +202,9 @@ async video(e,bv){
     'share': zh(data.stat.share),
     'like': zh(data.stat.like),
     'coin': zh(data.stat.coin),
+    'is_like': san.like,
+    'is_coin':san.coins,
+    'is_sc': san.favoured,
     'ppath': process.cwd()+'/plugins/xiaokeli/resources/bilibili/'
   }
   let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
@@ -198,6 +228,31 @@ if(!ck) return false
   }
   return res.data
 }
+
+//视频是否点赞,投币，收藏
+async san_(bv){
+  let ck=await this.getck()
+  if(!ck) return false
+  headers=await this.getheaders(ck)
+  let url=`https://api.bilibili.com/x/web-interface/archive/has/like?bvid=${bv}`
+  let res = await fetch(url, { method: "get", headers }).then(res => res.json())
+    if(res.code != 0){ 
+    await this.Check(e,ck)
+    return logger.error(res.message)
+  }
+   let like,coins,favoured
+   if(res.data==1) like=true
+   url=`https://api.bilibili.com/x/web-interface/archive/coins?bvid=${bv}`
+   res = await fetch(url, { method: "get", headers }).then(res => res.json())
+   if(res.data.multiply != 0) coins=true
+   url=`https://api.bilibili.com/x/v2/fav/video/favoured?aid=${bv}`
+    res = await fetch(url, { method: "get", headers }).then(res => res.json())
+    favoured=res.data.favoured
+    return {like,coins,favoured}
+}
+
+
+
 
 //获取在线观看人数
 async online(cid,bv){
@@ -236,6 +291,11 @@ if(!ck) return false
       data=[...top,...data]
       data[0]['zhiding']=true
     }
+    let n=0
+    data.map((v)=>{
+    n++
+    v['xh']=n
+    })
     return data
   }
 
@@ -275,7 +335,10 @@ if(!ck) return false
   like=6
   }
   let res = await fetch(url, { method: "post", headers }).then(res => res.json())
-  if(res.code==0) return e.reply(`[bilibili]${like==1 ? '点赞' : like==2 ? '取消点赞' : like==3 ? '点赞+投币('+n+'个)' : like==4 ? '收藏' : like==5 ? '取消收藏' : '三连'}成功！`)
+  if(res.code==0) {
+  e.reply(`[bilibili]${like==1 ? '点赞' : like==2 ? '取消点赞' : like==3 ? '点赞+投币('+n+'个)' : like==4 ? '收藏' : like==5 ? '取消收藏' : '三连'}成功！`)
+  return this.video(e,bv)
+  }
   if(res.code==65006&&like==1) return e.reply('[bilibili]这个视频已经点过赞了哟~')
   if(res.code==65004&&like==2) return e.reply('[bilibili]取消点赞失败，可能没点过赞呢~')
   if(like==3&&res.code==-104) return e.reply('˃̣̣̥᷄⌓˂̣̣̥᷅穷得叮当响，我已经没有硬币了！')
@@ -297,7 +360,7 @@ if(!ck) return false
 
 
 //关注，取消关注，拉黑，取消拉黑
-async user(e,id){
+async user(e,id,bv){
   let ck=await this.getck()
 if(!ck) return false
   headers=await this.getheaders(ck)
@@ -332,10 +395,14 @@ if(!ck) return false
     break
   case 22120:
     msg='这家伙本来就在黑名单里！！！'
-    brrak
+    break
   default:
     logger.error('code：'+res.code,res.message)
  }
+   if(res.code==0&&/关注/.test(e.msg)){
+   e.reply(msg)
+   return this.video(e,bv)
+   }
    if(msg) return e.reply(msg)
 }
 
@@ -354,7 +421,41 @@ if(!ck) return false
   let res = await fetch(url, { method: "post", headers }).then(res => res.json())
   switch (res.code) {
     case 0:
-      e.reply('[bilibili]评论成功！')
+    /*
+  头像
+  名称
+  评论时间
+  地址
+  等级
+  是否有lv6闪电
+  评论文本
+  */
+  //有时候会卡评论，所以直接照着写一个放在开头
+  let _pl_={}
+  _pl_['rpid']=res.data.reply.rpid
+  _pl_['tx']=res.data.reply.member.avatar
+  _pl_['name']=res.data.reply.member.uname
+  _pl_['time']='1秒前'
+  _pl_['sex']=res.data.reply.member.sex
+  _pl_['ip']=res.data.reply.reply_control.location
+  _pl_['lv']=res.data.reply.member.level_info.current_level
+  _pl_['lv_6']=res.data.reply.member.is_senior_member
+   if(res.data.reply.content.emote){
+    for (let u in res.data.reply.content.emote) {
+      res.data.reply.content.emote[u]=res.data.reply.content.emote[u].url
+    }}
+  _pl_['em']=res.data.reply.content.emote || ''
+   if(_pl_.em){
+     let bqs=res.data.reply.content.message.match(/\[(.*?)\]/g)
+       bqs.map((bq)=>{
+      if(Object.keys(_pl_.em).includes(bq)){
+      res.data.reply.content.message=res.data.reply.content.message.replace(bq,`,${_pl_.em[bq]},`)
+             }
+          })
+       }
+   _pl_['msg']=res.data.reply.content.message.split(',')
+      e.reply(`[bilibili]评论〖${msg}〗成功！`)
+      this.video(e,bv,_pl_)
       break
     case 12025:
       e.reply('[bilibili]评论的字数太多了！！！')
@@ -393,6 +494,8 @@ getpl(data){
     pl['tx']=v.member.avatar
     //等级
     pl['lv']=v.member.level_info.current_level
+    //lv.6是否有小闪电
+    pl['lv_6']=v.member.is_senior_member
     //点赞数量
     pl['num']=zh(v.like)
     //xx条回复
@@ -425,9 +528,9 @@ getpl(data){
     //评论文本
     pl['msg']=v.content.message.split(',')
     if(pic.length){
-    pic.map((c)=>{
+    // pic.map((c)=>{
     pl.msg.push(" [图片]")
-    })
+    // })
     }
     //评论回复(子评论)
     let zpl=[]
@@ -438,6 +541,7 @@ getpl(data){
       re['sex']=hf.member.sex
       re['tx']=hf.member.avatar
       re['lv']=hf.member.level_info.current_level
+      re['lv_6']=hf.member.is_senior_member
       re['num']=zh(hf.like)
       re['time']=hf.reply_control.time_desc.replace('发布','')
       re['ip']=hf.reply_control.location
@@ -574,6 +678,7 @@ if(!ck) return false
    e.reply('up主的信息没找到，可能是uid不对。。。') 
    return false
    }
+ res.data.card['is_gz']=res.data.following//是否关注
  return res.data.card
 }
 

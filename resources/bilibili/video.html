@@ -9,7 +9,7 @@
             <div class="box" style="background-image: url({{pic}});"><img src="{{ppath}}imgs/bf.png"> <img src="{{ppath}}imgs/d71.png">
             <p class="time">{{time}}</p>
                 <div class="h_box"><img src="{{ppath}}imgs/Bf.png">
-                    <p>{{view}}</p> <img class="Dm" src="{{ppath}}imgs/Dm.png">
+                    <p>{{view}}</p> <img class="Dm" src="{{ppath}}imgs/DM.png">
                     <p>{{danmaku}}</p> <img class="g" src="{{ppath}}imgs/g.png">
                     <p>{{online}}人正在看</p>
                 </div>
@@ -19,13 +19,13 @@
                     <p>{{title}}</p>
                 </div>
                 <div class="xx_box">
-                    <div class="x_box"><img src="{{ppath}}/imgs/like.png">
+                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_like ? 'like' : '_like'}}.png">
                         <p>{{like}}</p>
                     </div>
-                    <div class="x_box"><img src="{{ppath}}/imgs/tb.png">
+                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_coin ? 'tb' : '_tb'}}.png">
                         <p>{{coin}}</p>
                     </div>
-                    <div class="x_box_"><img src="{{ppath}}/imgs/sc.png">
+                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_sc ? 'sc' : '_sc'}}.png">
                         <p>{{favorite}}</p>
                     </div>
                     <div class="x_box"><img src="{{ppath}}/imgs/zf.png">
@@ -38,14 +38,14 @@
                     
                   <div class="l_box">
                   <p>{{name}}</p>
+                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv }}</p>
+                  <p>粉丝：{{fans}}</p>
                   <p>{{pubdate}}</p>
-                  <p>上传稿件时间</p>
-                  <p>{{ctime}}</p>
                 </div>
                 
                   <div class="r_box">
                   <div class="tab">简介</div>
-                  <div class="copy">{{copyright==1 ? '原创' : '转载'}}</div>
+                  <div class="is_gz">{{is_gz ? '已关注' : '未关注'}}</div>
                   <p>{{desc}}</p>
                 </div>
                 </div>
@@ -61,9 +61,18 @@
                 <p>{{k.name}}</p>
                 <p>{{k.time}}</p>
                 <p>{{k.ip}}</p>
-               <img src="{{ppath}}/imgs/{{k.lv}}.png">
+                {{if k.lv==6&&k.lv_6 }}
+                <div class='lv7_'>
+               <img class="lv7" src="{{ppath}}/imgs/7.png">
+               </div>
+               {{else}}
+               <img class="lv" src="{{ppath}}/imgs/{{k.lv}}.png">
+               {{/if}}
+               <p class='xh'>{{k.xh}}</p>
                <hr>
-               <div class="re_p">{{if k.zhiding}}<img class="zhiding" src="{{ppath}}/imgs/zhiding.png">{{/if}}{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+               <div class="re_p">{{if k.zhiding}}<img class="zhiding" src="{{ppath}}/imgs/zhiding.png">{{/if}}{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}
+{{each k.pic i}}<img class="pic_" src="{{i}}">{{/each}}{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+               
                <div class="re_w">
               <img class="dianzan" src="{{ppath}}/imgs/redz.png">
              <div class="_num">{{k.num}}</div>
@@ -75,8 +84,31 @@
               <img class="kong" src="{{ppath}}/imgs/kong.png"align="middle">
               {{/if}}
             </div>
-            
-            
+            <div class="pl">
+           <div class="pl_tab">可引用该图片回复的命令</div>
+           <div class="yy">
+                <p class="fr">权限：无</p>
+                <p>展开(+序号)</p>
+                <p>点赞</p>
+                <p>取消点赞</p>
+                <p>下载视频</p>
+                <hr>
+                <p class="fr">权限：仅管理、群主、主人</p>
+                <p>开启推送</p>
+                <p>关闭推送</p>
+                <hr>
+                <p class="fr">权限：仅主人</p>
+                <p>关注</p>
+                <p>取消关注</p>
+                <p>拉黑</p>
+                <p>取消拉黑</p>
+                <p>评论(+评论文本)</p>
+                <p>三连</p>
+                <p>投币(可+投币数)</p>
+                <p>收藏</p>
+                <p>取消收藏</p>
+           </div>
+            </div>
             <div class="logo">
                 from 小可莉
             </div>

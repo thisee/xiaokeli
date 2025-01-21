@@ -3,6 +3,7 @@
   font-family: "i";
   src: url("../font/i.ttf");
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -44,7 +45,7 @@ body {
     position: absolute;
 }
 .time{
-font-size: 12px;
+font-size: 18px;
 padding:2px 4px;
   border-radius: 5px;
  background:  #fff;
@@ -78,19 +79,25 @@ padding:2px 4px;
 .h_box img:first-child{
 width: 58px;
 height: 58px;
-}
+top:-14px;
 
-.h_box img:nth-child(3){
-width: 50px;
-height: 50px;
-top:-7px;
-  position: relative;
+}
+.box .h_box .Dm{
+width: 70px;
+height: 70px;
+top:0px;
+
+}
+.box .h_box .g{
+width: 60px;
+height: 60px;
+top:-8px;
 }
 .box .h_box p{
   color:#0e1c2d;
-  text-shadow: 0.5px 0.5px 1px red;
+  text-shadow: 0.5px 0.5px 1px #abdbd9;
   left: 10px;
-  top: -5px;
+  top: -15px;
   display: inline-block;
   position: relative;
 }
@@ -133,7 +140,7 @@ top:-7px;
 .t_box p{
   position: relative;
   left: 20px;
-  color:#0e1c2d;
+  color:#887ac6;
   text-shadow: 0.5px 0.5px 1px #fff;
   text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;				/*溢出内容隐藏*/
@@ -169,8 +176,8 @@ top:-7px;
 }
 
 .xx_box .x_box_ img{
-  width:100px;
-  height: 100px;
+  width:80px;
+  height: 80px;
   left: -5px;
   top: -8px;
   border-style:none;
@@ -178,9 +185,16 @@ top:-7px;
 }
 .xx_box p{
 text-align:center;
-left:-34px;
+left:-30px;
 top:-5px;
-text-shadow: 0.5px 0.5px 1px red;
+text-shadow: 0.5px 0.5px 1px #abdbd9;
+position: relative;
+}
+.xx_box .redz_{
+text-align:center;
+left:-20px;
+top:-5px;
+text-shadow: 0.5px 0.5px 1px #abdbd9;
 position: relative;
 }
 .xx_box .x_box_ p{
@@ -235,7 +249,7 @@ padding:20px 0px 20px 60px;
   white-space: pre-wrap;/*识别换行*/
     text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;				/*溢出内容隐藏*/
-	text-overflow: ellipsis;		/*文本溢出部分用省略号表示*/
+    text-overflow: ellipsis;		/*文本溢出部分用省略号表示*/
 	display: -webkit-box;			/*特别显示模式*/
 	-webkit-line-clamp: 8;			/*行数*/
 	line-clamp: 8;					
@@ -295,18 +309,19 @@ position: absolute;
  box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 7%);
 }
 
-.copy{
-font-size: 14px;
+.is_gz{
+font-size: 18px;
 padding:2px 8px;
   border-radius: 5px;
- background:  #ffafd2;
+ background:  #ace0f9;
+   font-weight:bold;
  opacity: 0.70;
   box-shadow: 2px 4px 4px 2px rgb(0 0 0 / 7%);
      position: absolute;
-     top:-40px;
-     right:50px;
-     color: #000;
-    text-shadow: 1px 1px 1px #fff;
+     top:-33px;
+     right:35px;
+     color: #ff62c3;
+    text-shadow: 1px 1px 1px #abdbd9;
 }
 
 .pl{
@@ -354,7 +369,7 @@ position: absolute;
 .re p{
 border-radius: 10px;
  font-size: 16px;
-  text-shadow: 0.5px 0.5px 1px #fff;
+  text-shadow: 0.5px 0.5px 1px #abdbd9;
 background: #ffafd2;
 padding:5px 8px;
 top:0px;
@@ -368,20 +383,49 @@ background: #f4c16b;
 .re p:nth-child(3){
 background: #b7c7c4;
 }
-.re img:nth-child(5){
+
+.re .xh{
+  position: absolute;
+  padding:2px 2px;
+  right: 5px;
+  top: 4px;
+  font-size: 14px;
+  background: #ace0f9;
+}
+
+.re img{
  opacity:1;
   left: 0px;
-  top: 10px;
-  height:21px;
-  width: 42px;
   position: relative;
   border-style:none;
   border-radius: 0%;
 }
 
-.zhiding{
-  height:28px;
-  width: 45px;
+.re .lv{
+height:21px;
+width: 42px;
+top: 10px;
+}
+
+.re .lv7_{
+position: relative;
+display:inline-block;
+}
+
+.re .lv7{
+opacity:1;
+  left: 0px;
+  top: -20px;
+  height:40px;
+  width: 50px;
+  position: absolute;
+  border-style:none;
+  border-radius: 0%;
+}
+.re .re_p .zhiding{
+  height:20px;
+  width: 37px;
+  top: 3px;
   position: relative;
 }
 
@@ -392,11 +436,11 @@ background: #b7c7c4;
 	overflow: hidden;				/*溢出内容隐藏*/
 	text-overflow: ellipsis;		/*文本溢出部分用省略号表示*/
 	display: -webkit-box;			/*特别显示模式*/
-	-webkit-line-clamp:3;			/*行数*/
-	line-clamp: 3;					
+	-webkit-line-clamp:4;			/*行数*/
+	line-clamp: 4;					
 	-webkit-box-orient: vertical;	/*盒子中内容竖直排列*/
 	font-size: 16px;
-	text-shadow: 0.5px 0.5px 1px red;
+	text-shadow: 0.5px 0.5px 1px #abdbd9;
 }
 
 .re .re_p .face{
@@ -418,9 +462,10 @@ top:8px;
   display: flex;
 }
 
-.dianzan{
+.re .dianzan{
   height:30px;
   width: 30px;
+  top: 2px;
   position: relative;
 }
 
@@ -430,7 +475,7 @@ top:8px;
   position: relative;
   bottom:-14.5px;
   color: #000;
-   text-shadow: 0.5px 0.5px 1px red;
+   text-shadow: 0.5px 0.5px 1px #abdbd9;
 }
 
 .reply_num {
@@ -442,8 +487,31 @@ left:600px;
 
 
 .pic{
-max-width: 880px;
-  max-height: 491px;
+max-height: 369px;
+}
+.re_p .pic_{
+max-height: 100px;
+}
+
+.pl .yy{
+ padding:10px 2px 2px 6px;
+ position: relative;
+}
+
+.pl .yy p{
+border-radius: 10px;
+ font-size: 14px;
+  text-shadow: 0.5px 0.5px 1px #abdbd9;
+background: #ace0f9;
+padding:5px 8px;
+top:0px;
+box-shadow: 2px 5px 5px 2px rgb(0 0 0 / 5%);
+  position: relative;
+display:inline-block;
+}
+
+.pl .yy .fr{
+background: #ffafd2;
 }
 
 

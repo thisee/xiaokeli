@@ -11,8 +11,8 @@
                     <p></p>
                 </div>
                 <div class="xx_box">
-                    <div class="x_box"><img src="{{ppath}}/imgs/like.png">
-                        <p>{{num}}</p>
+                    <div class="x_box"><img src="{{ppath}}/imgs/redz.png">
+                        <p class="redz_">{{num}}</p>
                     </div>
                     <div class="bili">
                     <img src="{{ppath}}/imgs/bili.png">
@@ -21,7 +21,7 @@
                     
                   <div class="l_box">
                   <p>{{name}}</p>
-                  <p>等级：{{lv}}级</p>
+                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv}}</p>
                   <p>{{time}}</p>
                   <p>{{ip}}</p>
                 </div>
@@ -52,7 +52,13 @@
                 <p>{{k.name}}</p>
                 <p>{{k.time}}</p>
                 <p>{{k.ip}}</p>
-               <img src="{{ppath}}/imgs/{{k.lv}}.png">
+               {{if k.lv==6&&k.lv_6 }}
+                <div class='lv7_'>
+               <img class="lv7" src="{{ppath}}/imgs/7.png">
+               </div>
+               {{else}}
+               <img class="lv" src="{{ppath}}/imgs/{{k.lv}}.png">
+               {{/if}}
                <hr>
                <div class="re_p">{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
                <div class="re_w">
