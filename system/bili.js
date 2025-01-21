@@ -168,7 +168,7 @@ async video(e,bv,_pl_){
   
   let plsl=zh(data.stat.reply)
   if(_pl_){
-   plsl++
+   plsl=Number(plsl)+1
   //重复就删除
    for(let i in pls){
    if(pls[i].rpid==_pl_.rpid){
