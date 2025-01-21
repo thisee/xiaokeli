@@ -195,6 +195,7 @@ async video(e,bv,_pl_){
     'lv_6': up_data.is_senior_member,
     'online': online,
     'pls': pls,
+    '_reply_': _pl_ ? true : false
     'view': zh(data.stat.view),
     'danmaku': zh(data.stat.danmaku),
     'reply': zh(data.stat.reply),
