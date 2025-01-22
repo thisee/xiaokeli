@@ -75,6 +75,7 @@ name2=name.replace(/星/g,'')
     case '物理': 
     case '物主': 
     case '毁灭': 
+    case '毁灭主': 
       sr_id=3128
       break
     case '火主':
@@ -83,8 +84,14 @@ name2=name.replace(/星/g,'')
       break
     case '虚数':
     case '同谐':
-    case '':
+    case '同谐主':
       sr_id=872
+      break
+    case '记忆':
+    case '记忆主':
+    case '冰主':
+    case '':
+     sr_id=4442
       break
     }
 }
@@ -94,6 +101,7 @@ name2=name.replace(/穹/g,'')
     case '物理': 
     case '物主': 
     case '毁灭': 
+    case '毁灭主': 
       sr_id=3124
       break
     case '火主':
@@ -102,8 +110,13 @@ name2=name.replace(/穹/g,'')
       break
     case '虚数':
     case '同谐':
-    case '':
+    case '同谐主':
       sr_id=411
+    case '记忆':
+    case '记忆主':
+    case '冰主':
+    case '':
+    sr_id=4441
       break
     }
 }
