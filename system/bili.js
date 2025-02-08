@@ -333,7 +333,8 @@ if(!ck) return false
   }
   }
   if(e.msg=='三连'){
-  url=`https://api.bilibili.com/x/web-interface/archive/like/triple?&bvid=${bv}&csrf=${csrf}`
+    let aid=(await this.sp_(e,bv)).aid//bv号转成aid
+  url=`https://api.bilibili.com/x/web-interface/archive/like/triple?&aid=${aid}&csrf=${csrf}`
   like=6
   }
   let res = await fetch(url, { method: "post", headers }).then(res => res.json())
