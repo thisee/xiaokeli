@@ -293,6 +293,7 @@ if(x==0){
 if(['物主','物理开拓者','毁灭开拓者'].includes(name)) name='物主'
 if(['存护开拓者','火主'].includes(name)) name='火主'
 if(['同谐开拓者','同谐主'].includes(name)) name='同谐主'
+if(['记忆开拓者','记忆主'].includes(name)) name='记忆主'
 if(['巡猎三月七','仙舟三月七','三月七·巡猎'].includes(name)) name='三月七·巡猎'
 if(['存护三月七','三月七'].includes(name)) name='无处不在的三月七'
 }
@@ -307,6 +308,7 @@ if(x==2){
 if(['物主','物理开拓者','毁灭开拓者'].includes(name)) name='开拓者-毁灭'
 if(['存护开拓者','火主'].includes(name)) name='开拓者-存护'
 if(['同谐开拓者','同谐主'].includes(name)) name='开拓者-同谐'
+if(['记忆开拓者','记忆主'].includes(name)) name='开拓者-记忆'
 if(['巡猎三月七','仙舟三月七','三月七·巡猎'].includes(name)) name='三月七-巡猎'
 if(['存护三月七','三月七'].includes(name)) name='无处不在的三月七'
 }
