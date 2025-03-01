@@ -59,7 +59,7 @@ let kg=await yaml.get('./plugins/xiaokeli/config/config.yaml')
 if(!kg.srstrategy) return false
 let name=e.msg.replace(/\*|#|星铁|更新|攻略|图/g,'')
 if(name=='全部'||name=='所有') return this.sch(e)
- if(['物主','物理开拓者','毁灭开拓者','存护开拓者','同谐开拓者','火主','同谐主','巡猎三月七','仙舟三月七','存护三月七','三月七','乱破'].includes(name)){
+ if(['物主','物理开拓者','毁灭开拓者','存护开拓者','同谐开拓者','火主','同谐主','巡猎三月七','仙舟三月七','存护三月七','三月七','记忆开拓者','记忆主'].includes(name)){
 //不处理
  }else{
  let _name = gsCfg.getRole(name)
@@ -127,7 +127,7 @@ async strategy (e) {
 let kg=await yaml.get('./plugins/xiaokeli/config/config.yaml')
  if(!kg.srstrategy) return false
  let name=e.msg.replace(/\*|#|星铁|攻略|图/g,'')
-if(['物主','物理开拓者','毁灭开拓者','存护开拓者','同谐开拓者','火主','同谐主','巡猎三月七','仙舟三月七','存护三月七','乱破'].includes(name)){
+if(['物主','物理开拓者','毁灭开拓者','存护开拓者','同谐开拓者','火主','同谐主','巡猎三月七','仙舟三月七','存护三月七','记忆开拓者','记忆主'].includes(name)){
  //不处理
  }else{
  let _name = gsCfg.getRole(name)
