@@ -12,6 +12,10 @@ export class jsyy extends plugin {
       event: 'message',
       priority: 15,
       rule: [{
+      reg: '^#*(小可莉)?清(空|除)语音(图片(列表)?)?缓存$',
+      fnc: 'qc',
+      permission: 'master',
+    },{
           reg: '^#*(开启|关闭)?超清语音(开启|关闭)?$',
           fnc: 'kg'
         },{
@@ -24,6 +28,11 @@ export class jsyy extends plugin {
         }
       ]
     })
+    this.task = {
+				cron: "0 20 4 * * *", //Cron表达式，(秒 分 时 日 月 星期)
+				name: "[小可莉]清空语音列表图片缓存",
+				fnc: () => this.qc(),
+      }
   }
 
 async check(){
@@ -188,18 +197,21 @@ data={name,isSr,table,yy}
 }
 
 if(img){
-let kg=await this.check()
-let time=kg.time
-if(time==0||time>120) time=121
+// let kg=await this.check()
+// let time=kg.time
+// if(time==0||time>120) time=121
 
-let f
-if(time==121){
-f=await e.reply(img)
-}else{
-f=await e.reply(img,false,{ recallMsg:time })
-}
+// let f
+// if(time==121){
+// f=await e.reply(img)
+// }else{
+// f=await e.reply(img,false,{ recallMsg:time })
+// }
 
-await redis.set(`xiaokeli_yy:${f.time}`,JSON.stringify(data),{EX: time })
+// await redis.set(`xiaokeli_yy:${f.time}`,JSON.stringify(data),{EX: time })
+let f=await e.reply(img)
+await this.temp()
+fs.writeFileSync(`./plugins/xiaokeli/temp/yy_pic/${f.time}.json`, JSON.stringify(data), 'utf-8')
 return true
 }
 return false
@@ -238,9 +250,10 @@ async fsyy (e) {
   }else{ return false}
  
     
-let data =await redis.get(`xiaokeli_yy:${source.time}`)
-  if(!data) return false
-  data=await JSON.parse(data)
+// let data =await redis.get(`xiaokeli_yy:${source.time}`)
+ if(!fs.existsSync(`./plugins/xiaokeli/temp/yy_pic/${source.time}.json`)) return false
+let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/yy_pic/${source.time}.json`,'utf-8'))
+  // data=await JSON.parse(data)
   let name=data.name
   let isSr=data.isSr
   let list=data.list
@@ -297,8 +310,23 @@ let data =await redis.get(`xiaokeli_yy:${source.time}`)
     return true;
   }
 
+async qc(e){
+try{
+fs.rmSync('./plugins/xiaokeli/temp/yy_pic/',{ recursive: true })
+}catch(err){
+return logger.error('删除文件失败：'+err)
+}
+if(e) return e.reply('已清空语音列表图片缓存')
+}
 
-
+ temp(){
+  if (!fs.existsSync('./plugins/xiaokeli/temp/')) {
+  fs.mkdirSync('./plugins/xiaokeli/temp/')
+    }
+  if (!fs.existsSync('./plugins/xiaokeli/temp/yy_pic/')) {
+     fs.mkdirSync('./plugins/xiaokeli/temp/yy_pic/')
+    }
+  }
 
 }
 

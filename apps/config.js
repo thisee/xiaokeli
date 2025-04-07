@@ -23,10 +23,6 @@ export class pz extends plugin {
           fnc: 'f3',
           permission: 'master'
             },{
-          reg: `^#*(${xx})?语音列表(撤回)?时间(\\d+)$`,
-          fnc: 'f4',
-          permission: 'master'
-          },{
           reg: `^#*(小可莉)?(设置)?(添加|删除)播报群(号)?(.*)$`,
           fnc: 'f6',
           permission: 'master'
@@ -69,11 +65,11 @@ async f3(e) {
   this.sz(e)
 }
 
-async f4(e){
-  let time=e.msg.replace(/#|小可莉设置|语音列表|时间|撤回/g,'')
-  await yaml.set(path,'time',Number(time))
-  this.sz(e)
-}
+// async f4(e){
+  // let time=e.msg.replace(/#|小可莉设置|语音列表|时间|撤回/g,'')
+  // await yaml.set(path,'time',Number(time))
+  // this.sz(e)
+// }
 
 
 async f6(e){
@@ -121,7 +117,7 @@ this.sz(e)
  
 async sz(e){
   let data = await yaml.get(path)
-  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n语音列表撤回时间：${data.time}秒\n米游社更新面板CD：${data.mbCD}秒\n星铁攻略：${data.srstrategy ? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt ? '已开启' :'已关闭'}\nb站相关功能：${data.bilibili ? '已开启' :'已关闭'}\n凌晨3:30自动更新xiaokeli：${data.update ? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
+  let msg=[`--------小可莉设置状态--------\n塔罗牌：${data.tlp? '已开启' :'已关闭'}\n塔罗牌每日次数：${data.tlpcs}次\n米游社更新面板CD：${data.mbCD}秒\n星铁攻略：${data.srstrategy ? '已开启' :'已关闭'}\n查委托必须带#前缀：${data.wt ? '已开启' :'已关闭'}\nb站相关功能：${data.bilibili ? '已开启' :'已关闭'}\n凌晨3:30自动更新xiaokeli：${data.update ? '已开启' :'已关闭'}\n米哈游视频播报群号：\n`]
   for (let group of data.groups) {
   try{
     Bot.pickGroup(group, true)
@@ -133,7 +129,7 @@ async sz(e){
    }
    msg.push(segment.image(`https://p.qlogo.cn/gh/${group}/${group}/100`),'\n',Bot.pickGroup(group, true).info.group_name,group.toString())
   }
-  let msg_='--------设置指令列表--------\n①塔罗牌：\n小可莉设置塔罗牌开启\n小可莉设置塔罗牌关闭\n\n②塔罗牌每日次数：\n小可莉设置塔罗牌次数(+数字)\n\n③语音列表撤回时间：\n语音列表时间(+数字,只能取1～120)\n\n④米游社更新面板CD：\n小可莉设置面板cd(+数字)\n\n⑤星铁攻略：\n小可莉设置星铁攻略开启\n小可莉设置星铁攻略关闭\n\n⑥查委托是否必须带#前缀：\n开启委托前缀\n关闭委托前缀\n\n⑦b站相关功能：\n小可莉设置b站开启\n小可莉设置b站关闭\n\n⑧小可莉自动更新：\n小可莉设置自动更新开启\n小可莉设置自动更新关闭\n\n⑨米哈游视频播报群号：\n添加播报群(+群号)\n删除播报群(+群号)'
+  let msg_='--------设置指令列表--------\n①塔罗牌：\n小可莉设置塔罗牌开启\n小可莉设置塔罗牌关闭\n\n②塔罗牌每日次数：\n小可莉设置塔罗牌次数(+数字)\n\n③米游社更新面板CD：\n小可莉设置面板cd(+数字)\n\n④星铁攻略：\n小可莉设置星铁攻略开启\n小可莉设置星铁攻略关闭\n\n⑤查委托是否必须带#前缀：\n开启委托前缀\n关闭委托前缀\n\n⑥b站相关功能：\n小可莉设置b站开启\n小可莉设置b站关闭\n\n⑦小可莉自动更新：\n小可莉设置自动更新开启\n小可莉设置自动更新关闭\n\n⑧米哈游视频播报群号：\n添加播报群(+群号)\n删除播报群(+群号)'
   msg=[msg,msg_]
   msg=await common.makeForwardMsg(e, msg,'小可莉设置')
   return e.reply(msg)
