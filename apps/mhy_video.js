@@ -117,7 +117,7 @@ async function vid(e,thise=false) {
     msg.data.meta.detail.news=[]
     //合并消息的外层文案
     let text={
-      'text':`${names}发现了新视频，一起来看看吧!`
+      'text':`${names}发布了新视频，一起来看看吧!`
     }
     msg.data.meta.detail.news.push(text)
     }else{

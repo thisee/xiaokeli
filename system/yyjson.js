@@ -18,9 +18,9 @@ return list
 
 async sr_download(id){
 let url=`https://api-static.mihoyo.com/common/blackboard/sr_wiki/v1/content/info?app_sn=sr_wiki&content_id=${id}`
-  let SRdata  =await (await fetch(url)).json()
+  let SRdata_  = await (await fetch(url)).json()
    // SRdata.data.content.contents[0].text
-  SRdata=SRdata.data.content.contents
+  let SRdata=SRdata_.data.content.contents
   let data=false
   let s
   for(let i of SRdata){
@@ -30,6 +30,29 @@ let url=`https://api-static.mihoyo.com/common/blackboard/sr_wiki/v1/content/info
     break
    }
    }
+ if(!data){
+  SRdata=SRdata_.data.content.rpg_new_tmp_content.modules[9].components[0].data
+  if(!SRdata) return logger.error('该角色的语音还没有人上传，过几天再试试吧~')
+  SRdata=JSON.parse(SRdata)
+  let list=SRdata.list
+  let table=[],sr_yy=[],v=0
+  for (let i of list[0].table){
+    table[v]={}
+    table[v]['name']=i.name
+    table[v]['content']=i.content
+    v++
+  }
+  for (let n in list){
+    sr_yy[n]=[]
+    for (let k in list[n].table){
+      sr_yy[n][k]=list[n].table[k].audioUrl	
+    }
+  }
+  let sr={
+    table,sr_yy
+    }
+  return sr
+ }
  if(!data) return logger.error('该角色的语音还没有人上传，过几天再试试吧~')
  let  conent=[]
  let  name = data[0].match(/__voice-content>(.*?)<\/span>/g)
