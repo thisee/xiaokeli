@@ -58,6 +58,7 @@ async b(e){
   if(e.raw_message=='[json消息]'||e.message[0]?.type=='json'){
   bv=await this.json_bv(e.msg)
   if(!bv) return false
+  e.reply(`b站链接：https://b23.tv/${bv}`)
   return bili.video(e,bv)
   }
   //链接

@@ -79,7 +79,7 @@ async sm(e) {
     return true
 }
 
-//子评论
+//评论区
 async reply_(e,n,msg_id){
  if(!fs.existsSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`)) return false
  let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`,'utf-8'))
@@ -97,7 +97,7 @@ async reply_(e,n,msg_id){
 }
 
 
-//下载子评论图片
+//下载评论区图片
 async tu(e,msg_time){
 let data=await redis.get(`xiaokeli:bili:${msg_time}`)
 if(!data) return e.reply("缓存数据过期~")
