@@ -117,14 +117,14 @@ async function vid(e,thise=false) {
     msg.data.meta.detail.news=[]
     //合并消息的外层文案
     let text={
-      'text':`${botname}发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
+      'text':`${names}发现了新视频，一起来看看吧!`
     }
     msg.data.meta.detail.news.push(text)
     }else{
     msg.data.unshift({
     nickname: Bot.nickname,
     user_id: Bot.uin,
-    message: `${botname}发现了新视频，一起来看看吧！\n这次的游戏有：${names}`
+    message: `${names}发布了新视频，一起来看看吧！`
     })
     }
    if (thise) {
