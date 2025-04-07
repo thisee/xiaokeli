@@ -79,22 +79,30 @@ async sm(e) {
     return true
 }
 
-//展开评论区的某个评论
+//展开评论区
 async reply_(e,n,msg_id){
  if(!fs.existsSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`)) return false
  let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`,'utf-8'))
  if(!n) n=1
- if(!data.pls[n-1]) return e.reply('序号不对哟~')
+ let img,pic
+ if(data.pls&&data.pls[n-1]){
  let data_=await this.zpl(data.bv,data.pls[n-1].rpid)
   data.pls[n-1]['reply']=data_
   data.pls[n-1]['ppath']=data.ppath
-  let img=await render('bilibili/reply',data.pls[n-1],{e,pct:2.4,ret:false})
-  let pic={
+  img=await render('bilibili/reply',data.pls[n-1],{e,pct:2.4,ret:false})
+  pic={
   n:n,
   msg_id:msg_id
   }
   data.pls[n-1]['pic']=pic
-  data=  data.pls[n-1]
+  data=data.pls[n-1]
+  }else if(data.reply&&data.reply[n-1]){
+   data=data.reply[n-1]
+   data['ppath']=process.cwd()+'/plugins/xiaokeli/resources/bilibili/'
+  img=await render('bilibili/reply_',data,{e,pct:2.4,ret:false})
+  }else{
+  return e.reply('序号不对哟~')
+  }
   let re=await e.reply(img)
   // await redis.set(`xiaokeli:bili:${re.time}`,JSON.stringify(pic), { EX: 600 })
   await this.temp()
@@ -320,7 +328,12 @@ async zpl(bv,rpid,type=1){
      await this.Check(e,ck)
      return logger.mark('b站评论区获取失败')
     }
-    data=await this.getpl(data)
+    data=await this.getpl(data,false)
+    let n=0
+    data.map((v)=>{
+    n++
+    v['xh']=n
+    })
     return data
 }
 
@@ -501,11 +514,13 @@ if(!ck) return false
 }
 
 //处理评论信息
-getpl(data){
+getpl(data,no_zpl=true){
   let pls=[]
   if(data.length!=0){
-  //由评论点赞数从高到低重新排序
+  //如果不是子评论区，由评论点赞数从高到低重新排序
+  if(no_zpl){ 
   data=data.sort(compare('like'))
+  }
   data.map((v)=>{
     let pl={}
     //rpid

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ppath}}video.css">
+    </head>
+    <body {{sys.scale}}>
+        <div class="container" id="container">
+           <div class="up_box"><img src="{{tx}}">
+                <div class="t_box">
+                    <p></p>
+                </div>
+                <div class="xx_box">
+                    <div class="x_box"><img src="{{ppath}}/imgs/redz.png">
+                        <p class="redz_">{{num}}</p>
+                    </div>
+                    <div class="bili">
+                    <img src="{{ppath}}/imgs/bili.png">
+                    </div>
+                    
+                    
+                  <div class="l_box">
+                  <p>{{name}}</p>
+                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv}}</p>
+                  <p>{{time}}</p>
+                  <p>{{ip}}</p>
+                </div>
+                
+                  <div class="r_box_">
+                  <div class="tab">评论</div>
+                  <div class="_r_box_">{{if typeof(msg)=='String'}}{{msg}}{{else}}{{each msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('(标签➩)')}}<div class="re_p_bq">{{msg.replace('(标签➩)','')}}</div>{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+                </div>
+                </div>
+ 
+            </div>
+            
+            <div class="logo">
+                from 小可莉
+            </div>
+        </div>
+    </body>
+</html>

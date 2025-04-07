@@ -268,13 +268,23 @@ width: 730px;
 min-height: 170px;
 border-radius: 15px;
 padding:20px 0px 20px 60px;
+display:inline-block;
 }
 
 .r_box_ p{
   text-align:left;
   white-space: pre-wrap;/*识别换行*/
-	font-size: 14px;
+  font-size: 14px;
 }
+
+.r_box_ ._r_box_{
+position: relative;
+text-align:left;
+left:-30px;
+white-space: pre-wrap;/*识别换行*/
+font-size: 14px;
+}
+
 
 .r_box_ .face{
 height:20px;
@@ -354,7 +364,6 @@ position: absolute;
 }
 
 .re .re_tx{
- position: relative;
   left: 2px;
   top: 0px;
   height:80px;
@@ -442,11 +451,12 @@ opacity:1;
 	font-size: 16px;
 	text-shadow: 0.5px 0.5px 1px #abdbd9;
 }
-.re .re_p .re_p_bq{
+
+.re_p_bq{
 background: #ace0f9;
 border-radius: 10px;
 position: relative;
-display:inline-block;
+display:inline;
 }
 
 .re .re_p .face{

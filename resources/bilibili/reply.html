@@ -45,7 +45,7 @@
               
               {{if reply.length}}
             <div class="pl">
-              <div class="pl_tab">{{reply_num}}</div>
+              <div class="pl_tab">{{reply_num}}，如果评论内容过长会被省略，详情可回复该图片：展开(+序号)</div>
               {{each reply k}}
               <div class="re">
                 <img class="re_tx" src="{{k.tx}}">
@@ -59,6 +59,7 @@
                {{else}}
                <img class="lv" src="{{ppath}}/imgs/{{k.lv}}.png">
                {{/if}}
+               <p class='xh'>{{k.xh}}</p>
                <hr>
                <div class="re_p">{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('(标签➩)')}}<div class="re_p_bq">{{msg.replace('(标签➩)','')}}</div>{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
                <div class="re_w">
