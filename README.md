@@ -39,7 +39,7 @@ pnpm i
 |*m更新面板|通过米游社获取崩铁角色面板|
 |(bilibili视频解析)|bilibili视频自动解析：卡片，链接(都可)|
 |点赞，投币...|对bilibili视频的一些操作|
-|小可莉设置|查看设置|
+|小可莉设置|查看设置，具体文件在xiaokeli/config/config.yaml|
 |小可莉帮助|不懂的就发这个|
 
 <details>

@@ -36,7 +36,7 @@
             
            {{if pic.length}}
               <div class="pl">
-              <div class="pl_tab">共{{pic.length}}张图,可在10分钟内回复该图片：下载图片</div>
+              <div class="pl_tab">共{{pic.length}}张图,可回复该图片：下载图片</div>
               {{each pic i}}
               <img class="pic" src="{{i}}">
               {{/each}}
@@ -60,7 +60,7 @@
                <img class="lv" src="{{ppath}}/imgs/{{k.lv}}.png">
                {{/if}}
                <hr>
-               <div class="re_p">{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('[图片]')}}<img class="face_" src="{{ppath}}/imgs/tu.png">{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
+               <div class="re_p">{{if typeof(k.msg)=='String'}}{{k.msg}}{{else}}{{each k.msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}<img class="face" src="{{msg}}">{{else if msg.includes('(标签➩)')}}<div class="re_p_bq">{{msg.replace('(标签➩)','')}}</div>{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</div>
                <div class="re_w">
               <img class="dianzan" src="{{ppath}}/imgs/redz.png">
              <div class="_num">{{k.num}}</div>

@@ -79,29 +79,35 @@ async sm(e) {
     return true
 }
 
-//评论区
+//展开评论区的某个评论
 async reply_(e,n,msg_id){
  if(!fs.existsSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`)) return false
  let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`,'utf-8'))
  if(!n) n=1
  if(!data.pls[n-1]) return e.reply('序号不对哟~')
+ let data_=await this.zpl(data.bv,data.pls[n-1].rpid)
+  data.pls[n-1]['reply']=data_
   data.pls[n-1]['ppath']=data.ppath
   let img=await render('bilibili/reply',data.pls[n-1],{e,pct:2.4,ret:false})
   let pic={
   n:n,
   msg_id:msg_id
   }
+  data.pls[n-1]['pic']=pic
+  data=  data.pls[n-1]
   let re=await e.reply(img)
-  await redis.set(`xiaokeli:bili:${re.time}`,JSON.stringify(pic), { EX: 600 })
+  // await redis.set(`xiaokeli:bili:${re.time}`,JSON.stringify(pic), { EX: 600 })
+  await this.temp()
+ fs.writeFileSync(`./plugins/xiaokeli/temp/bili/${re.time}.json`, JSON.stringify(data), 'utf-8')
   return true
 }
 
 
 //下载评论区图片
 async tu(e,msg_time){
-let data=await redis.get(`xiaokeli:bili:${msg_time}`)
+let data=fs.readFileSync(`./plugins/xiaokeli/temp/bili/${msg_time}.json`,'utf-8')
 if(!data) return e.reply("缓存数据过期~")
-data=JSON.parse(data)
+data=(JSON.parse(data)).pic
 let msg_id=data.msg_id
 let n=data.n
 n--
@@ -163,12 +169,12 @@ async video(e,bv,_pl_){
   */
   let san=await this.san_(bv)
   
-  let list_num=(await yaml.get(path)).list_num || 15
+  let list_num=(await yaml.get(path)).list_num || 10
   let pls=(await this.pl(bv)).slice(0,list_num)
   
   let plsl=zh(data.stat.reply)
   if(_pl_){
-   plsl=Number(plsl)+1
+   plsl=Number(String(plsl).replace(/,/g,''))+1
   //重复就删除
    for(let i in pls){
    if(pls[i].rpid==_pl_.rpid){
@@ -177,6 +183,7 @@ async video(e,bv,_pl_){
    break
    }
    }
+   plsl=zh(plsl)
    pls=[_pl_,...pls]
   }
   data={
@@ -271,7 +278,7 @@ if(!ck) return false
   return res.data.total
 }
 
-//获取评论区
+//获取评论区(子评论同理)
 async pl(bv,type=1){
     let ck=await this.getck()
 if(!ck) return false
@@ -301,7 +308,21 @@ if(!ck) return false
     return data
   }
 
-
+//获取评论区的评论的子评论
+async zpl(bv,rpid,type=1){
+    let ck=await this.getck()
+    if(!ck) return false
+    headers=await this.getheaders(ck)
+    let url=`https://api.bilibili.com/x/v2/reply/reply?oid=${bv}&root=${rpid}&type=${type}&ps=20&pn=1`
+    let res = await fetch(url, { method: "get", headers }).then(res => res.json())
+    let data=res.data.replies
+    if(res.code != 0) {
+     await this.Check(e,ck)
+     return logger.mark('b站评论区获取失败')
+    }
+    data=await this.getpl(data)
+    return data
+}
 
 
 
@@ -528,43 +549,49 @@ getpl(data){
              }
           })
        }
-    //评论文本
+    //处理子评论，将(回复 @xxx:)变成一个标签
+    if(v.content.message.includes('回复 @')) {
+    let na=v.content.message.match('回复 @(.*) :')[1]
+    v.content.message=v.content.message.replace(`回复 @${na} :`,`回复 ,(标签➩)@${na}, :`)
+    }
+   //评论文本
     pl['msg']=v.content.message.split(',')
+
     if(pic.length){
     // pic.map((c)=>{
     pl.msg.push(" [图片]")
     // })
     }
     //评论回复(子评论)
-    let zpl=[]
-    v.replies.map((hf)=>{
-      let re={}
-      re['rpid']=hf.rpid
-      re['name']=hf.member.uname
-      re['sex']=hf.member.sex
-      re['tx']=hf.member.avatar
-      re['lv']=hf.member.level_info.current_level
-      re['lv_6']=hf.member.is_senior_member
-      re['num']=zh(hf.like)
-      re['time']=hf.reply_control.time_desc.replace('发布','')
-      re['ip']=hf.reply_control.location
-     if(hf.content.emote){
-     for (let l in hf.content.emote) {
-      hf.content.emote[l]=hf.content.emote[l].url
-     }}
-      re['em']=hf.content.emote || ''
-      if(re.em){
-     let bqs_=hf.content.message.match(/\[(.*?)\]/g)
-       bqs_.map((bq_)=>{
-      if(Object.keys(re.em).includes(bq_)){
-      hf.content.message=hf.content.message.replace(bq_,`,${re.em[bq_]},`)
-             }
-          })
-       }
-      re['msg']=hf.content.message.split(',')
-      zpl.push(re)
-    })
-    pl['reply']=zpl
+    // let zpl=[]
+    // v.replies.map((hf)=>{
+      // let re={}
+      // re['rpid']=hf.rpid
+      // re['name']=hf.member.uname
+      // re['sex']=hf.member.sex
+      // re['tx']=hf.member.avatar
+      // re['lv']=hf.member.level_info.current_level
+      // re['lv_6']=hf.member.is_senior_member
+      // re['num']=zh(hf.like)
+      // re['time']=hf.reply_control.time_desc.replace('发布','')
+      // re['ip']=hf.reply_control.location
+     // if(hf.content.emote){
+     // for (let l in hf.content.emote) {
+      // hf.content.emote[l]=hf.content.emote[l].url
+     // }}
+      // re['em']=hf.content.emote || ''
+      // if(re.em){
+     // let bqs_=hf.content.message.match(/\[(.*?)\]/g)
+       // bqs_.map((bq_)=>{
+      // if(Object.keys(re.em).includes(bq_)){
+      // hf.content.message=hf.content.message.replace(bq_,`,${re.em[bq_]},`)
+             // }
+          // })
+       // }
+      // re['msg']=hf.content.message.split(',')
+      // zpl.push(re)
+    // })
+    // pl['reply']=zpl
     pls.push(pl)
   })
   }
