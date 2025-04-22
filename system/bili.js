@@ -293,8 +293,8 @@ if(!ck) return false
     headers=await this.getheaders(ck)
     let url=`https://api.bilibili.com/x/v2/reply?oid=${bv}&type=${type}&sort=1&nohot=0&ps=20&pn=1`
     let res = await fetch(url, { method: "get", headers }).then(res => res.json())
+    if(res.code == 12002) return logger.mark('视频评论区已关闭')
     let data=res.data.replies
-    //if(res.code == 12002) data='评论区已经关闭'
     if(res.code != 0) {
      await this.Check(e,ck)
      return logger.mark('b站评论区获取失败')
