@@ -127,7 +127,8 @@ async sz(e){
     logger.info(`检测到群号${group}已失效，已经自动删除`)
     continue
    }
-   msg.push(segment.image(`https://p.qlogo.cn/gh/${group}/${group}/100`),'\n',Bot.pickGroup(group, true).info.group_name,group.toString())
+   let gname=Bot.pickGroup(group, true).info?.group_name || Bot.pickGroup(group, true).name
+   msg.push(segment.image(`https://p.qlogo.cn/gh/${group}/${group}/100`),'\n',gname,group.toString())
   }
   let msg_='--------设置指令列表--------\n①塔罗牌：\n小可莉设置塔罗牌开启\n小可莉设置塔罗牌关闭\n\n②塔罗牌每日次数：\n小可莉设置塔罗牌次数(+数字)\n\n③米游社更新面板CD：\n小可莉设置面板cd(+数字)\n\n④星铁攻略：\n小可莉设置星铁攻略开启\n小可莉设置星铁攻略关闭\n\n⑤查委托是否必须带#前缀：\n开启委托前缀\n关闭委托前缀\n\n⑥b站相关功能：\n小可莉设置b站开启\n小可莉设置b站关闭\n\n⑦小可莉自动更新：\n小可莉设置自动更新开启\n小可莉设置自动更新关闭\n\n⑧米哈游视频播报群号：\n添加播报群(+群号)\n删除播报群(+群号)'
   msg=[msg,msg_]
