@@ -9,7 +9,7 @@ export class kclogs extends plugin {
       name: '[小可莉]卡池历史',
       dsc: '',
       event: 'message',
-      priority: 15,
+      priority: -99,
       rule: [{
           reg: '^#*(.*)卡池$',
           fnc: 'gslogs'

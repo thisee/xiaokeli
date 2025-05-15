@@ -292,6 +292,7 @@ let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/yy_pic/${source.tim
   }
  if(!table[n]) return e.reply('喂喂喂！你这序号不对吧🤔',true)
  yy=table[n].audio_url
+ if(!yy) return e.reply('该语言暂未公布',true)
  }
  if(!table[n]) return e.reply('喂喂喂！你这序号不对吧🤔',true)
   let kg=await this.check()
