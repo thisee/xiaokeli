@@ -41,6 +41,7 @@ for (let i in gz_names) {
       }
    }
 }
+name=name.replace(/,|，|!|！|」|「/g,'')
 srlogs.map((v)=>{
   if(v.js_five.includes(name)||v.js_four.includes(name)||(this.cl(v.gz_five)).includes(name)||(this.cl(v.gz_four)).includes(name)){
     data.push(
