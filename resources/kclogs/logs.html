@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{ppath}}logs.css" />
+  <link rel="shortcut icon" href="#" />
+</head>
+
+<body {{sys.scale}}>
+  <div class="container" id="container">
+      <div class="xkl_box">
+      {{each data v}}
+      <div class="l_box">
+      <div class="tab_lable">
+      {{v.ver}}
+      </div>
+      <div class="time_box">
+      时间：{{v.time}}
+      </div>
+
+      <div class="n_box">
+      <img class="tu" src="{{ppath}}imgs/sr/{{v.s}}.png">
+      <div class="js_box">
+      {{each v.js_five js_f}}
+      <div class="five">
+      <img class="face" src="{{js_path}}{{js_f}}/imgs/face.webp">
+      </div>
+      {{/each}}
+      {{each v.js_four js_f}}
+      <div class="four">
+      <img class="face" src="{{js_path}}{{js_f}}/imgs/face.webp">
+      </div>
+      {{/each}}
+      </div>
+      <div class="gz_box">
+      {{each v.gz_five gz_f}}
+      <div class="five">
+      <img class="face" src="{{gz_path}}{{gz_f}}/icon.webp">
+      </div>
+      {{/each}}
+      {{each v.gz_four gz_f}}
+      <div class="four">
+      <img class="face" src="{{gz_path}}{{gz_f}}/icon.webp">
+      </div>
+      {{/each}}
+      </div>
+      </div>
+
+      </div>
+
+      {{/each}}
+      </div>
+      
+      <div class="logo">from 小可莉</div>
+      </div>
+</body>
+
+</html>

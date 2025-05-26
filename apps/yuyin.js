@@ -147,9 +147,9 @@ if(name2){
 
 //调用小可莉原神别名
 let gsnames=yaml.get('./plugins/xiaokeli/system/default/gs_js_names.yaml','utf-8')
-   for (let i in Object.values(gsnames)) {
-      if(Object.values(gsnames)[i].includes(name)) {
-        name=Object.keys(gsnames)[i]
+    for (let i in gsnames) {
+      if(gsnames[i].includes(name)) {
+        name=i
         break
       }
    }
