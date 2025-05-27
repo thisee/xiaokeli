@@ -1,4 +1,9 @@
 date:
+  【5.6下半】2025/05/27~2025/06/17:
+  - 基尼奇
+  - 雷电将军
+  - 山王长牙,薙草之稻光
+  - 神里绫华,神里绫人,宵宫,千织,八重神子,荒泷一斗,珊瑚宫心海,枫原万叶,有乐御簾切,波乱月白经津,雾切之回光,苍古自由之誓,赤角石溃杵,神乐之真意,不灭月华,飞雷之弦振
   【5.6上半】2025/05/07~2025/05/27:
   - 爱可菲
   - 娜维娅
@@ -306,6 +311,10 @@ date:
    - 阿莫斯之弓,风鹰剑
    
 imgs:
+  - https://act-upload.mihoyo.com/wiki-user-upload/2025/05/22/154622675/cf58c24da0226a28aa992680dfda1da4_3638361457855439566.png
+  - https://act-upload.mihoyo.com/wiki-user-upload/2025/05/22/154622675/c10368599306e619597455da0f163262_5318782129322365309.png
+  - https://act-upload.mihoyo.com/wiki-user-upload/2025/05/22/154622675/10352388a1138af188df9172cf426870_3738699682790306093.png
+  - ./plugins/xiaokeli/resources/混池/混池3.jpg
   【5.6上半】:
   - https://act-upload.mihoyo.com/wiki-user-upload/2025/05/05/154622675/033c049d6d6b541a14653cb6047f893d_9106398880874193511.png
   - https://act-upload.mihoyo.com/wiki-user-upload/2025/05/05/154622675/20c7f13c4a091e2005b53ae2aceabd62_3848274993047154009.png
@@ -612,7 +621,7 @@ imgs:
     - https://uploadstatic.mihoyo.com/ys-obc/2021/05/16/15568211/0b08a802c5297a86cb718787541f279a_7255231285761022743.png
     - https://uploadstatic.mihoyo.com/ys-obc/2021/05/16/15568211/c15602e8181f8a7553b4e71f644af07a_8997972907639963579.jpeg
     
-#by听语惊花，3.8之后的没更了
+#by听语惊花,3.8之后的没更了
 ver:
   1.0: https://upload-bbs.miyoushe.com/upload/2023/07/04/289918413/84ea003c565d717ed534392e33793d28_7693356461609549518.png
   1.1: https://upload-bbs.miyoushe.com/upload/2023/07/04/289918413/d1e239e9aa9310e14ac0f1f1660486e2_8606209319685035511.png
