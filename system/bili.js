@@ -79,6 +79,13 @@ async sm(e) {
     return true
 }
 
+//简介
+async jj(e,msg_id){
+ if(!fs.existsSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`)) return false
+ let data=JSON.parse(fs.readFileSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`,'utf-8'))
+  render('bilibili/video_',data,{e,pct:2.4,ret:true})
+}
+
 //展开评论区
 async reply_(e,n,msg_id){
  if(!fs.existsSync(`./plugins/xiaokeli/temp/bili/${msg_id}.json`)) return false
@@ -246,6 +253,16 @@ if(!ck) return false
   }
   return res.data
 }
+
+//获取动态详细
+async dt(id){
+let ck=await this.getck()
+if(!ck) return false
+  headers=await this.getheaders(ck)
+  let url=`https://api.bilibili.com/x/polymer/web-dynamic/v1/detail?id=${id}`
+  let res = await fetch(url, { method: "get", headers }).then(res => res.json())
+}
+
 
 //视频是否点赞,投币，收藏
 async san_(bv){

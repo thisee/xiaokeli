@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ppath}}video.css">
+    </head>
+    <body {{sys.scale}}>
+        <div class="container" id="container">
+            <div class="box" style="background-image: url({{pic}});"><img src="{{ppath}}imgs/bf.png"> <img src="{{ppath}}imgs/d71.png">
+            <p class="time">{{time}}</p>
+                <div class="h_box"><img src="{{ppath}}imgs/Bf_.png">
+                    <p>{{view}}</p> <img class="Dm" src="{{ppath}}imgs/DM.png">
+                    <p>{{danmaku}}</p> <img class="g" src="{{ppath}}imgs/g.png">
+                    <p>{{online}}人正在看</p>
+                </div>
+            </div>
+            <div class="up_box"><img src="{{tx}}">
+                <div class="t_box">
+                    <p>{{title}}</p>
+                </div>
+                 <div class="xx_box">
+                  <div class="l_box">
+                  <p>{{name}}</p>
+                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv }}</p>
+                  <p>粉丝：{{fans}}</p>
+                  <p>{{pubdate}}</p>
+                </div>
+                
+                  <div class="jj_box">
+                  <div class="tab">简介</div>
+                  <p>{{desc}}</p>
+                </div>
+                </div>
+ 
+            </div>
+
+            <div class="logo">
+                from 小可莉
+            </div>
+        </div>
+    </body>
+</html>

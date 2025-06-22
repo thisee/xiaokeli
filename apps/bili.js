@@ -136,6 +136,10 @@ if(Version.name=='TRSS-Yunzai'&&source.message[0]?.type=='json') {
    if(!user_id) user_id=(await bili.sp_(e,bv)).owner.mid
    return bili.tuis(e,user_id,e.group_id)
   }
+  
+  //获取简介
+  if(e.msg=='简介') return bili.jj(e,source.time)
+  
   //主动解析卡片(emmm...一般都自动解析了)
   if(['解析','解'].includes(e.msg)&&source.message[0].type=='json') return bili.video(e,bv)
   
@@ -160,6 +164,11 @@ async getbv(url){
    let res=await fetch(url)
    if(res.status!=200) return false
    url=res.url
+   let id=url.match('https://www.bilibili.com/opus/([\\w]+)')
+   if(id) {
+   bili.dt(id[1])
+   return false
+   }
    let bv=url.match('https://www.bilibili.com/video/([\\w]+)')
    if(!bv) return false
    bv=bv[1]

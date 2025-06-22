@@ -46,8 +46,7 @@ pnpm i
   <summary>未来也许可能万一会写的。。</summary>
   
 1. xx图鉴
-2. 星铁历史卡池？
-3. 氵。。。
+2. 氵。。。
 
 </details>
 

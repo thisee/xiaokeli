@@ -244,6 +244,7 @@ height: 170px;
 border-radius: 15px;
 padding:20px 0px 20px 60px;
 }
+
 .r_box p{
   text-align:left;
   white-space: pre-wrap;/*识别换行*/
@@ -257,6 +258,21 @@ padding:20px 0px 20px 60px;
 	font-size: 14px;
 }
 
+.jj_box{
+position: relative;
+background: #deefec;
+box-shadow: 2px 5px 5px 2px rgb(0 0 0 / 5%);
+width: 700px;
+min-height: 170px;
+border-radius: 15px;
+padding:20px 0px 20px 60px;
+}
+
+.jj_box p{
+  text-align:left;
+  white-space: pre-wrap;/*识别换行*/
+  font-size: 14px;
+}
 
 .r_box_{
 position: relative;
