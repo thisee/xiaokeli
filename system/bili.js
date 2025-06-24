@@ -839,7 +839,13 @@ if(send) re=await e.reply(`开始下载bilibili视频，视频大小约为${Math
 const data = Buffer.from(await (await fetch(url)).arrayBuffer())
 const v_path='./plugins/xiaokeli/temp/bili/temp.mp4'
 fs.writeFileSync(v_path,data)
+let v_re=await e.reply(segment.video(v_path))
+//视频太大，发出去容易报错，故撤回重发一次
+if(res.data.durl[0].size>31457280) {
+if(e.isGroup) e.group.recallMsg(v_re.message_id)
+else e.friend.recallMsg(v_re.message_id)
 await e.reply(segment.video(v_path))
+}
 if(send){
 if(e.isGroup) await e.group.recallMsg(re.message_id)
 else await e.friend.recallMsg(re.message_id)
