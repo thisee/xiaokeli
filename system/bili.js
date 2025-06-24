@@ -258,7 +258,7 @@ async video(e,bv,_pl_,dow,_re){
     'pl_type':1
   }
   let dow_=(await yaml.get(path)).dow
-  let video_
+  let video_,msgs
   let url=`https://api.bilibili.com/x/player/wbi/playurl?bvid=${bv}&cid=${cid}&qn=80&fnval=1&fourk=0&platform=html5&high_quality=1`
  let ck=await this.getck()
  headers=await this.getheaders(ck)
@@ -271,10 +271,11 @@ if(dow&&(res.data.durl[0].size<31457280)&&dow_){
 }
 if(_re){
   if(video_){
-  common.makeForwardMsg(e,[`b站链接：https://b23.tv/${bv}`,video_])
+  msgs=common.makeForwardMsg(e,[`b站链接：https://b23.tv/${bv}`,video_])
   }else{
-  e.reply(`b站链接：https://b23.tv/${bv}`)
+  msgs=`b站链接：https://b23.tv/${bv}`
   }
+  e.reply(msgs)
 }
 
   let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
