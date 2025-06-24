@@ -276,6 +276,8 @@ if(_re){
   msgs=`b站链接：https://b23.tv/${bv}`
   }
   e.reply(msgs)
+}else{
+  if(video_) e.reply(video_)
 }
 
   let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
