@@ -263,6 +263,7 @@ async video(e,bv,_pl_,dow){
  headers=await this.getheaders(ck)
 let res = await (await fetch(url,{ method: "get", headers })).json()
 if(res.code==0){
+  data['size']=Math.ceil(res.data.durl[0].size/1048576)+'MB'
 if(dow&&(res.data.durl[0].size<31457280)&&dow_){
   this.Download(e,bv,false,res)
   }
