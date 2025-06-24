@@ -60,8 +60,7 @@ async b(e){
   id=await this.json_bv(e.msg)
   if(!id) return false
   if(id.bv){
-  e.reply(`b站链接：https://b23.tv/${id.bv}`)
-  return bili.video(e,id.bv,false,true)
+  return bili.video(e,id.bv,false,true,true)
   }
   if(id.dt_id){
   //动态解析

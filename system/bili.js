@@ -162,7 +162,7 @@ return true
 
 
 //主页
-async video(e,bv,_pl_,dow){
+async video(e,bv,_pl_,dow,_re){
   let data=await this.sp_(e,bv)
   if(!data) return false
   /*
@@ -258,6 +258,7 @@ async video(e,bv,_pl_,dow){
     'pl_type':1
   }
   let dow_=(await yaml.get(path)).dow
+  let video_
   let url=`https://api.bilibili.com/x/player/wbi/playurl?bvid=${bv}&cid=${cid}&qn=80&fnval=1&fourk=0&platform=html5&high_quality=1`
  let ck=await this.getck()
  headers=await this.getheaders(ck)
@@ -265,7 +266,14 @@ let res = await (await fetch(url,{ method: "get", headers })).json()
 if(res.code==0){
   data['size']=Math.ceil(res.data.durl[0].size/1048576)+'MB'
 if(dow&&(res.data.durl[0].size<31457280)&&dow_){
-  this.Download(e,bv,false,res)
+  video_=this.Download(e,bv,false,res,true)
+  }
+}
+if(_re){
+  if(video_){
+  common.makeForwardMsg(e,[`b站链接：https://b23.tv/${bv}`,video_])
+  }else{
+  e.reply(`b站链接：https://b23.tv/${bv}`)
   }
 }
 
@@ -814,7 +822,7 @@ if(!ck) return false
 }
 
 //下载视频
-async Download(e,bv,send=true,res){
+async Download(e,bv,send=true,res,vo){
 if(Download) {
  if(send) e.reply('有其他视频在下载中，请等待！',true)
  return false
@@ -840,18 +848,21 @@ if(send) re=await e.reply(`开始下载bilibili视频，视频大小约为${Math
 const data = Buffer.from(await (await fetch(url)).arrayBuffer())
 const v_path='./plugins/xiaokeli/temp/bili/temp.mp4'
 fs.writeFileSync(v_path,data)
-let v_re=await e.reply(segment.video(v_path))
+let v_re,video=segment.video(v_path)
+if(!vo) v_re=await e.reply(video)
 //视频太大，发出去容易报错，故撤回重发一次
 if(res.data.durl[0].size>31457280) {
 if(e.isGroup) e.group.recallMsg(v_re.message_id)
 else e.friend.recallMsg(v_re.message_id)
-await e.reply(segment.video(v_path))
+await e.reply(video)
 }
 if(send){
 if(e.isGroup) await e.group.recallMsg(re.message_id)
 else await e.friend.recallMsg(re.message_id)
 }
 Download=false
+if(vo) return video
+return true
 }
 
 
