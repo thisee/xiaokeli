@@ -1,4 +1,6 @@
 botname: ''
+wuyong: ''
+gggg: ''
 #修改的时候注意英文冒号后面要加空格
 #超清语音开关：true表示开，false表示关
 voice: false
@@ -18,7 +20,7 @@ update: false
 groups: []
 #是否启用bilibili相关功能：true表示开，false表示关
 bilibili: true
-#b站视频的时长小于60秒时是否自动下载：true表示开，false表示关
+#b站视频小于30MB时是否自动下载：true表示开，false表示关
 dow: true
 #bilibili视频的主评论区，显示几条评论((1-20)不建议设置过多)
 list_num: 10

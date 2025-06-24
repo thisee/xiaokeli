@@ -23,7 +23,7 @@ if(Object.keys(cfg).length!= Object.keys(def_cfg).length){
 fs.cpSync('./plugins/xiaokeli/system/default/config.yaml',_path)
 logger.info('[小可莉]重载配置文件')
 for(let v in cfg){
-yaml.set(_path,v,cfg[v])
+if(Object.keys(def_cfg).includes(v)) yaml.set(_path,v,cfg[v])
 }
 }
 

@@ -192,7 +192,8 @@ async video(e,bv,_pl_,dow){
   获取第一个分p视频的cid用于获取在线观看人数
   pages[0].cid
   */
-  let online=await this.online(data.pages[0].cid,bv)
+  let cid=data.pages[0].cid
+  let online=await this.online(cid,bv)
   
   /*获取up主信息
     粉丝数量：fans
@@ -257,9 +258,16 @@ async video(e,bv,_pl_,dow){
     'pl_type':1
   }
   let dow_=(await yaml.get(path)).dow
-  if(dow&&(sp_time<61)&&dow_){
-  this.Download(e,bv,false)
+  let url=`https://api.bilibili.com/x/player/wbi/playurl?bvid=${bv}&cid=${cid}&qn=80&fnval=1&fourk=0&platform=html5&high_quality=1`
+ let ck=await this.getck()
+ headers=await this.getheaders(ck)
+let res = await (await fetch(url,{ method: "get", headers })).json()
+if(res.code==0){
+if(dow&&(res.data.durl[0].size<31457280)&&dow_){
+  this.Download(e,bv,false,res)
   }
+}
+
   let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
  let re=await e.reply(img)
  await this.temp()
@@ -805,7 +813,7 @@ if(!ck) return false
 }
 
 //下载视频
-async Download(e,bv,send=true){
+async Download(e,bv,send=true,res){
 if(Download) {
  if(send) e.reply('有其他视频在下载中，请等待！',true)
  return false
@@ -818,16 +826,16 @@ let url=`https://api.bilibili.com/x/player/wbi/playurl?bvid=${bv}&cid=${cid}&qn=
  let ck=await this.getck()
 if(!ck) return false
  headers=await this.getheaders(ck)
-let res = await (await fetch(url,{ method: "get", headers })).json()
+if(!res) res = await (await fetch(url,{ method: "get", headers })).json()
 if(res.code!=0) return logger.error(res.message)
-if(res.data.durl[0].size>31457280) {
- if(send) e.reply('视频大于30MB,下不了一点！！！')
+if(res.data.durl[0].size>(31457280*3)) {
+ if(send) e.reply('视频大于90MB,下不了一点！！！')
  return false
 }
 url=res.data.durl[0].url
 Download=true
 let re
-if(send) re=await e.reply('开始下载bilibili视频，请稍等！',true)
+if(send) re=await e.reply(`开始下载bilibili视频，视频大小约为${Math.ceil(res.data.durl[0].size/1048576)}MB，请稍等！`,true)
 const data = Buffer.from(await (await fetch(url)).arrayBuffer())
 const v_path='./plugins/xiaokeli/temp/bili/temp.mp4'
 fs.writeFileSync(v_path,data)
