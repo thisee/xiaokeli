@@ -817,7 +817,10 @@ if(!ck) return false
  headers=await this.getheaders(ck)
 let res = await (await fetch(url,{ method: "get", headers })).json()
 if(res.code!=0) return logger.error(res.message)
-if((res.data.durl[0].size>31457280) && send) return e.reply('视频大于30MB,下不了一点！！！')
+if(res.data.durl[0].size>31457280) {
+ if(send) e.reply('视频大于30MB,下不了一点！！！')
+ return false
+}
 url=res.data.durl[0].url
 Download=true
 let re
