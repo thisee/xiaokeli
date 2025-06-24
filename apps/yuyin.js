@@ -231,7 +231,7 @@ async fsyy (e) {
         }else{
           source = (await e.friend.getChatHistory((e.source ?.time + 1), 1)).pop()
     }
-  if (source.message.length!=1&&source.message[0].type!='image')  return false
+  if (source.message.length!=1&&source.message[0]?.type!='image')  return false
   if(e.msg && e.msg.length>5) return false
   let xh=await (/\d+/).exec(e.msg)
   if(!xh) return false
@@ -315,7 +315,6 @@ async qc(e){
 try{
 fs.rmSync('./plugins/xiaokeli/temp/yy_pic/',{ recursive: true })
 }catch(err){
-return logger.error('删除文件失败：'+err)
 }
 if(e) return e.reply('已清空语音列表图片缓存')
 }

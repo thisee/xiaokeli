@@ -18,6 +18,8 @@ update: false
 groups: []
 #是否启用bilibili相关功能：true表示开，false表示关
 bilibili: true
+#b站视频的时长小于60秒时是否自动下载：true表示开，false表示关
+dow: true
 #bilibili视频的主评论区，显示几条评论((1-20)不建议设置过多)
 list_num: 10
 #bilibili收藏视频的收藏夹序号(1就是默认收藏夹)

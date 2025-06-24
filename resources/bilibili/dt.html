@@ -2,59 +2,50 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link rel="stylesheet" type="text/css" href="{{ppath}}video.css">
+        <link rel="stylesheet" type="text/css" href="{{ppath}}dt.css">
     </head>
     <body {{sys.scale}}>
         <div class="container" id="container">
-            <div class="box" style="background-image: url({{pic}});"><img src="{{ppath}}imgs/bf.png"> <img src="{{ppath}}imgs/d71.png">
-            <p class="time">{{time}}</p>
-                <div class="h_box"><img src="{{ppath}}imgs/Bf_.png">
-                    <p>{{view}}</p> <img class="Dm" src="{{ppath}}imgs/DM.png">
-                    <p>{{danmaku}}</p> <img class="g" src="{{ppath}}imgs/g.png">
-                    <p>{{online}}人正在看</p>
+            <div class="up_box">
+                <div class="zuo">
+                <img src="{{tx}}">
+                <div class="l_box">
+                  <p>{{name}}</p>
+                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv }}</p>
+                  <p>粉丝：{{fans}}</p>
+                  <p>{{pub_time}}</p>
                 </div>
-            </div>
-            <div class="up_box"><img src="{{tx}}">
+                </div>
+                <div class="you">
                 <div class="t_box">
-                    <p>{{title}}</p>
+                <p>{{title}}</p>
                 </div>
                 <div class="xx_box">
-                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_like ? 'like' : '_like'}}.png">
+                    <div class="x_box"><img src="{{ppath}}/imgs/redz.png">
                         <p>{{like}}</p>
                     </div>
-                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_coin ? 'tb' : '_tb'}}.png">
-                        <p>{{coin}}</p>
-                    </div>
-                    <div class="x_box"><img src="{{ppath}}/imgs/{{is_sc ? 'sc' : '_sc'}}.png">
-                        <p>{{favorite}}</p>
-                    </div>
                     <div class="x_box"><img src="{{ppath}}/imgs/zf.png">
-                        <p>{{share}}</p>
+                        <p>{{forward}}</p>
                     </div>
                     <div class="bili">
                     <img src="{{ppath}}/imgs/bili.png">
                     </div>
-                    
-                    
-                  <div class="l_box">
-                  <p>{{name}}</p>
-                  <p>等级：{{ lv_6&&lv==6 ? lv+'s' : lv }}</p>
-                  <p>粉丝：{{fans}}</p>
-                  <p>{{pubdate}}</p>
                 </div>
-                
-                  <div class="r_box">
-                  <div class="tab">简介</div>
+                <div class="r_box">
+                  <div class="tab">内容</div>
                   <div class="is_gz">{{is_gz ? '已关注' : '未关注'}}</div>
-                  <p>{{desc}}</p>
+            <p>{{if typeof(msg)=='String'}}{{msg}}{{else}}{{each msg msg}}{{if msg.includes('hdslb.com\/bfs\/')}}{{if msg.includes('【表情》')}}<img class="face_" src="{{msg.replace('【表情》','')}}">{{else}}<img class="face" src="{{msg}}">{{/if}}{{else}}{{msg}}{{/if}}{{/each}}{{/if}}</p>
                 </div>
                 </div>
  
             </div>
             
+
+
+
             <div class="pl">
-              <div class="pl_tab">评论区 {{reply}}</div>
-              {{if reply != 0 }}
+              <div class="pl_tab">评论区 {{pl}}</div>
+              {{if pl != 0 }}
               {{each pls k}}
               <div class="re">
                 <img class="re_tx" src="{{k.tx}}">
@@ -89,15 +80,6 @@
            <div class="yy">
                 <p class="fr">限制：无</p>
                 <p>展开(+序号)</p>
-                <p>简介</p>
-                <p>点赞</p>
-                <p>取消点赞</p>
-                <p>下载封面</p>
-                <p>下载视频</p>
-                <hr>
-                <p class="fr">限制：仅管理、群主、主人</p>
-                <p>开启推送</p>
-                <p>关闭推送</p>
                 <hr>
                 <p class="fr">限制：仅主人</p>
                 <p>关注</p>
@@ -105,10 +87,6 @@
                 <p>拉黑</p>
                 <p>取消拉黑</p>
                 <p>评论(+评论文本)</p>
-                <p>三连</p>
-                <p>投币(可+投币数)</p>
-                <p>收藏</p>
-                <p>取消收藏</p>
            </div>
             </div>
             <div class="logo">
