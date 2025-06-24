@@ -266,7 +266,7 @@ let res = await (await fetch(url,{ method: "get", headers })).json()
 if(res.code==0){
   data['size']=Math.ceil(res.data.durl[0].size/1048576)+'MB'
 if(dow&&(res.data.durl[0].size<31457280)&&dow_){
-  video_=this.Download(e,bv,false,res,true)
+  video_=await this.Download(e,bv,false,res,true)
   }
 }
 if(_re){
