@@ -648,7 +648,7 @@ if(!ck) return false
   _pl_['name']=res.data.reply.member.uname
   _pl_['time']='刚刚'
   _pl_['sex']=res.data.reply.member.sex
-  _pl_['ip']=res.data.reply.reply_control.location.replace('IP属地：','')
+  _pl_['ip']=res.data.reply.reply_control.location ? res.data.reply.reply_control.location.replace('IP属地：','') : ''
   _pl_['lv']=res.data.reply.member.level_info.current_level
   _pl_['lv_6']=res.data.reply.member.is_senior_member
    if(res.data.reply.content.emote){
@@ -717,7 +717,7 @@ getpl(data,no_zpl=true){
     //评论时间
     pl['time']=v.reply_control.time_desc.replace('发布','')
     //评论时的ip属地
-    pl['ip']=v.reply_control.location.replace('IP属地：','')
+    pl['ip']=v.reply_control.location ? v.reply_control.location.replace('IP属地：','') : ''
     //评论图片(arr)
     let pic=[]
     if(v.content.pictures?.length){
@@ -806,7 +806,10 @@ if(!ck) return false
 
 //下载视频
 async Download(e,bv,send=true){
-if(Download&&send) return e.reply('有其他视频在下载中，请等待！',true)
+if(Download) {
+ if(send) e.reply('有其他视频在下载中，请等待！',true)
+ return false
+ }
 // const  n = await (/\d+/).exec(e.msg) || 0
 const cid=await this.player(bv,0)
 // const qn= (await yaml.get(path)).qn==0 ? 80 : (await yaml.get(path)).qn==1 ? 112 : 116
@@ -824,7 +827,7 @@ if(res.data.durl[0].size>31457280) {
 url=res.data.durl[0].url
 Download=true
 let re
-if(send) re=e.reply('开始下载bilibili视频，请稍等！',true)
+if(send) re=await e.reply('开始下载bilibili视频，请稍等！',true)
 const data = Buffer.from(await (await fetch(url)).arrayBuffer())
 const v_path='./plugins/xiaokeli/temp/bili/temp.mp4'
 fs.writeFileSync(v_path,data)
