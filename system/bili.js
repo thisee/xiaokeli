@@ -850,6 +850,7 @@ let re
 if(send) re=await e.reply(`开始下载bilibili视频，视频大小约为${Math.ceil(res.data.durl[0].size/1048576)}MB，请稍等！`,true)
 const data = Buffer.from(await (await fetch(url)).arrayBuffer())
 const v_path='./plugins/xiaokeli/temp/bili/temp.mp4'
+await this.temp()
 fs.writeFileSync(v_path,data)
 let v_re,video=segment.video(v_path)
 if(!vo) v_re=await e.reply(video)
