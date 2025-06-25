@@ -190,6 +190,7 @@ if(Version.name=='TRSS-Yunzai'&&source.message[0]?.type=='json') {
     if(bv) user_id=(await bili.sp_(e,bv)).owner.mid
     if(dt_id) user_id=await bili.dt_mid(dt_id)
   }
+  if(!user_id) return false
   return bili.user(e,user_id,bv || dt_id, bv ? true : false)
   }
   
@@ -198,6 +199,7 @@ if(Version.name=='TRSS-Yunzai'&&source.message[0]?.type=='json') {
     if(pl_id && pl_type && dt_id) return bili.bili_reply(e,pl_id,pl_type,dt_id)
     if(dt_id && !pl_id && !pl_type){
       let pl=await bili.dt_mid(dt_id,true)
+      if(!pl) return false
       pl_id=pl.pl_id
       pl_type=pl.pl_type
       return bili.bili_reply(e,pl_id,pl_type,dt_id)

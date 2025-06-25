@@ -309,22 +309,22 @@ if(!ck) return false
   headers=await this.getheaders(ck)
   let url=`https://api.bilibili.com/x/polymer/web-dynamic/v1/detail?id=${id}`
   let res = await fetch(url, { method: "get", headers }).then(res => res.json())
-  if(!res.data?.item) return false
-  let basic=res.data.item.basic//comment_type类型，comment_id_str评论区id
-  var module_dynamic=res.data.item.modules.module_dynamic
-  var module_stat=res.data.item.modules.module_stat
-  let desc=module_dynamic.desc
-  let author=res.data.item.modules.module_author
+  let basic,module_dynamic,module_stat,desc,author,up_data,pls,forward,like,pics=[],msgs=[],title,desc_
+  if(res.data?.item){
+  basic=res.data.item.basic//comment_type类型，comment_id_str评论区id
+  module_dynamic=res.data.item.modules.module_dynamic
+  module_stat=res.data.item.modules.module_stat
+  desc=module_dynamic.desc
+  author=res.data.item.modules.module_author
   //获取up信息
-  let up_data=await this.up_xx(false,author.mid)
+  up_data=await this.up_xx(false,author.mid)
   //评论数量
-  let pls=module_stat.comment.count
+  pls=module_stat.comment.count
   //分享数量
-  let forward=module_stat.forward.count
+  forward=module_stat.forward.count
   //点赞数量
-  let like=module_stat.like.count
-  let pics=[],msgs=[],title
-  if(desc){
+  like=module_stat.like.count
+  if(basic.comment_type==11 || (basic.comment_type==17&&desc) ){
     //动态的图片
     if(module_dynamic.major){
     var items=module_dynamic.major.draw.items
@@ -334,6 +334,7 @@ if(!ck) return false
   }
     //动态的emoji
     let em=[]
+    if(desc.rich_text_nodes.map){
     desc.rich_text_nodes.map((v)=>{
       if(v.emoji) {
         em.push({
@@ -342,6 +343,7 @@ if(!ck) return false
       })
     }
     })
+    }
     //动态的文本
     let msg=desc.text
     if(em.length){
@@ -360,10 +362,35 @@ if(!ck) return false
   title=module_dynamic.major.article.title
   msgs.push(module_dynamic.major.article.covers[0])
   msgs.push('\n'+module_dynamic.major.article.desc+"......")
+}else{
+   return false
 }
-
+}else{
+  url=`https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=${id}`
+  res = await fetch(url, { method: "get", headers }).then(res => res.json())
+  if(!res.data?.card?.desc) return false
+  desc_=res.data.card.desc
+  if(desc_.type!=2) return false
+  //获取up信息
+  up_data=await this.up_xx(false,desc_.uid)
+  //评论数量
+  pls=desc_.comment
+  //分享数量
+  forward=desc_.repost
+  //点赞数量
+  like=desc_.like
+  let card=JSON.parse(res.data.card.card)
+  let msg=card.item.description
+  let em=res.data.card.display.emoji_info.emoji_details
+  if(em){
+     em.map((v)=>{
+     msg=msg.replace(v.emoji_name,`❥【表情》${v.url}❥`)  
+    })
+  }
+  msgs=msg.split('❥')
+}
   //获取评论区    
-  let pinglun=await this.pl(basic.comment_id_str,basic.comment_type)
+  let pinglun=basic ? await this.pl(basic.comment_id_str,basic.comment_type) : await this.pl(desc_.rid,11)
   let list_num=(await yaml.get(path)).list_num || 10
   pinglun=pinglun.slice(0,list_num)
 
@@ -384,15 +411,15 @@ if(!ck) return false
       //动态id
       dt_id:id,
       //评论区id
-      pl_id:basic.comment_id_str,
+      pl_id:basic ? basic.comment_id_str : desc_.rid,
       //评论区类型
-      pl_type:basic.comment_type,
+      pl_type:basic ? basic.comment_type : 11,
       //发稿时间
-      pub_time:author.pub_time.replace(/年|月/g,'-').replace(/日/g,''),
+      pub_time:author ? author.pub_time.replace(/年|月/g,'-').replace(/日/g,'') : moment(new Date(desc_.timestamp*1000)).format("YY-MM-DD HH:mm"),
       //up名字
-      name:author.name,
+      name:author?.name || desc_.user_profile.info.uname,
       //up头像
-      tx:author.face,
+      tx:author?.face || desc_.user_profile.info.face,
       //粉丝数量
       fans: zh(up_data.fans),
       //是否关注
@@ -402,7 +429,7 @@ if(!ck) return false
       //小闪电？
       lv_6: up_data.is_senior_member,
       title:title,
-      uid:author.mid,
+      uid:author?.mid || desc_.uid,
       pl:zh(pls),
       forward:zh(forward),
       like:zh(like),
@@ -434,6 +461,15 @@ if(!ck) return false
   headers=await this.getheaders(ck)
   let url=`https://api.bilibili.com/x/polymer/web-dynamic/v1/detail?id=${dt_id}`
   let res = await fetch(url, { method: "get", headers }).then(res => res.json())
+  if(!res.data?.item){
+  url=`https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=${dt_id}`
+  res = await fetch(url, { method: "get", headers }).then(res => res.json())
+  if(!res.data?.card?.desc) return false
+  let desc_=res.data.card.desc
+  if(desc_.type!=2) return false
+    if(is_pl_id) return {pl_id: desc_.rid ,pl_type: 11 }
+    return desc_.uid
+  }
   if(is_pl_id) return { pl_id:res.data.item.basic.comment_id_str , pl_type:res.data.item.basic.comment_type }
   return res.data.item.modules.module_author.mid
 }
