@@ -44,33 +44,14 @@ for (let i in gz_names) {
 name=name.replace(/,|，|!|！|」|「/g,'')
 srlogs.map((v)=>{
   if(v.js_five.includes(name)||v.js_four.includes(name)||(this.cl(v.gz_five)).includes(name)||(this.cl(v.gz_four)).includes(name)){
-    data.push(
-      {
-    s: Math.ceil(Math.random() * 4),
-    ver:v.ver,
-    time: v.time,
-    js_five: v.js_five,
-    js_four: v.js_four,
-     gz_five: v.gz_five,
-     gz_four: v.gz_four
-      }
-    )
+    data.push(this.v_(v))
   }
 })
 }else if(e.msg.includes('*')||e.msg.includes('星铁')){
 if(name.includes('上半')||name.includes('下半')){//根据版本
 for(let v of srlogs){
   if(v.ver==name){
-    data.push(
-      {
-    s: Math.ceil(Math.random() * 4),
-    ver:v.ver,
-    time: v.time,
-    js_five: v.js_five,
-    js_four: v.js_four,
-     gz_five: v.gz_five,
-     gz_four: v.gz_four
-      }
+    data.push(this.v_(v)
     )
     break
   }
@@ -78,17 +59,7 @@ for(let v of srlogs){
 }else{
 for(let v of srlogs){
   if(v.ver==`${name}上半`||v.ver==`${name}下半`){//根据版本
-    data.push(
-      {
-    s: Math.ceil(Math.random() * 4),
-    ver:v.ver,
-    time: v.time,
-    js_five: v.js_five,
-    js_four: v.js_four,
-     gz_five: v.gz_five,
-     gz_four: v.gz_four
-      }
-    )
+    data.push(this.v_(v))
   }
   if(data.length==2) break
 }
@@ -114,4 +85,17 @@ cl(arr){
   })
     return arr_
   }
+
+v_ (v){
+return {
+    s: Math.ceil(Math.random() * 4),
+    ver:v.ver,
+    time: v.time,
+    js_five: v.js_five,
+    js_four: v.js_four,
+    gz_five: v.gz_five,
+    gz_four: v.gz_four
+  }
+}
+
 }

@@ -1,11 +1,6 @@
-botname: ''
-wuyong: ''
-gggg: ''
 #修改的时候注意英文冒号后面要加空格
 #超清语音开关：true表示开，false表示关
 voice: false
-#米游社更新面板CD[单位:秒]
-mbCD: 180
 #塔罗牌开关：true表示开，false表示关
 tlp: false
 #塔罗牌每天上限次数
