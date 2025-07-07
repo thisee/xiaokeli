@@ -258,11 +258,7 @@ async video(e,bv,_pl_,dow,_re){
     'pl_type':1
   }
   
-  let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
- let re=await e.reply(img)
- await this.temp()
- fs.writeFileSync(`./plugins/xiaokeli/temp/bili/${re.time}.json`, JSON.stringify(data), 'utf-8')
- 
+
   let dow_=(await yaml.get(path)).dow
   let video_,msgs
   let url=`https://api.bilibili.com/x/player/wbi/playurl?bvid=${bv}&cid=${cid}&qn=80&fnval=1&fourk=0&platform=html5&high_quality=1`
@@ -286,6 +282,10 @@ if(_re){
   if(video_) e.reply(video_)
 }
 
+  let img=await render('bilibili/video',data,{e,pct:2.4,ret:false})
+ let re=await e.reply(img)
+ await this.temp()
+ fs.writeFileSync(`./plugins/xiaokeli/temp/bili/${re.time}.json`, JSON.stringify(data), 'utf-8')
   
  return true
 }
