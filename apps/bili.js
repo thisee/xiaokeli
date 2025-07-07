@@ -93,14 +93,14 @@ async b(e){
    bv=bv[1]
    return bili.video(e,bv,false,true)
   }
-  if(e.msg.includes('https://www.bilibili.com/opus/')){
-   dt_id=e.msg.match('https://www.bilibili.com/opus/([\\w]+)')
+  if(e.raw_message.includes('https://www.bilibili.com/opus/')){
+   dt_id=e.raw_message.match('https://www.bilibili.com/opus/([\\w]+)')
    if(!dt_id) return false
    dt_id=dt_id[1]
    return bili.dt(dt_id,e)
   }
-  if(e.msg.includes('https://m.bilibili.com/opus/')){
-   dt_id=e.msg.match('https://m.bilibili.com/opus/([\\w]+)')
+  if(e.raw_message.includes('https://m.bilibili.com/opus/')){
+   dt_id=e.raw_message.match('https://m.bilibili.com/opus/([\\w]+)')
    if(!dt_id) return false
    dt_id=dt_id[1]
    return bili.dt(dt_id,e)
